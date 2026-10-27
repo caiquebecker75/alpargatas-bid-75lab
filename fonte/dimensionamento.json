@@ -1,0 +1,29 @@
+{
+ "dtc": {
+  "Criação, engenharia e AR": 2859.359999999999,
+  "Produção": 2076.0,
+  "Logística e rede": 1721.9,
+  "Atendimento e planejamento": 1147,
+  "Fiscal": 290,
+  "Direção de criação": 365.9359999999999
+ },
+ "b2b": {
+  "Criação, engenharia e AR": 3304.6400000000003,
+  "Produção": 1546.0,
+  "Logística e implementação": 840,
+  "Atendimento e planejamento": 1056.0,
+  "Fiscal": 222,
+  "Direção de criação": 426.46400000000006
+ },
+ "unidades": {
+  "arte_rapida": 2.5,
+  "peca_tatica": 3.2,
+  "peca_estrutural": 8.6,
+  "kv": 10.0,
+  "projeto_especial": 72.0,
+  "ambientacao_gc": 19.7,
+  "ar_formato": 2.5,
+  "orcamento": 3.5,
+  "acompanhamento": 4.1
+ }
+}
