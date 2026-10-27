@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/deck.css?v=20261027141216">
+<link rel="stylesheet" href="assets/deck.css?v=20261027172450">
 </head>
 <body>
 
@@ -56,7 +56,7 @@
 <div id="wrap"><div id="stage" class="t-foto capa">
 
   <!-- ===================================================== 01 · capa -->
-  <section class="tela s-capa ativa" data-tema="foto" data-titulo="Capa" data-cap="">
+  <section id="capa" class="tela s-capa ativa" data-tema="foto" data-titulo="Capa" data-cap="">
     <div class="foto" role="img" aria-label="Campanha Havaianas"></div>
     <div class="veu"></div>
     <div class="texto">
@@ -64,8 +64,8 @@
       <h1 class="anima d1">Agência de<br>Trade Marketing<br><span>B2B e DTC</span></h1>
       <p class="lead anima d2">Proposta técnica · parceria de 12 meses · calendário 2027</p>
       <div class="acoes anima d3">
-        <button class="botao cheio seta" data-ir="2" data-cursor="Ir">Começar</button>
-        <button class="botao seta" data-ir="13" data-cursor="Ver">Ver o time</button>
+        <button class="botao cheio seta" data-ir="essencial" data-cursor="Ir">Começar</button>
+        <button class="botao seta" data-ir="time" data-cursor="Ver">Ver o time</button>
         <button class="botao" data-sumario data-cursor="Abrir">Sumário</button>
       </div>
     </div>
@@ -77,7 +77,7 @@
   </section>
 
   <!-- ===================================================== 02 · essencial -->
-  <section class="tela s-ess" data-tema="claro" data-titulo="O essencial em uma página" data-cap="O essencial em uma página">
+  <section id="essencial" class="tela s-ess" data-tema="claro" data-titulo="O essencial em uma página" data-cap="O essencial em uma página">
     <h2 class="anima">Duas operações separadas, 14 pessoas <span class="apagada">e a execução</span> <span class="onda t-teal">medida loja a loja.</span></h2>
     <div class="tiles anima d1">
       <button class="tile on" data-alvo="0" data-cursor="Ler"><span class="n">01</span><svg class="ic"><use href="#i-caixa"/></svg><b>O que entregamos</b></button>
@@ -90,15 +90,15 @@
     <div class="painel anima d2">
       <span class="eyebrow" id="essTit">01 · O que entregamos</span>
       <p id="essTxt">Operação de trade ponta a ponta nos dois canais: criação, produção, logística e gestão de rede. Duas estruturas separadas: DTC e B2B não dividem fila.</p>
-      <button class="botao mini seta" id="essIr" data-ir="12" data-cursor="Ir">Ir para o capítulo</button>
+      <button class="botao mini seta" id="essIr" data-ir="metodo" data-cursor="Ir">Ir para o capítulo</button>
     </div>
     <template id="essDados">
-      <i data-ir="12" data-t="01 · O que entregamos">Operação de trade ponta a ponta nos dois canais: criação, produção, logística e gestão de rede. Duas estruturas separadas: DTC e B2B não dividem fila.</i>
-      <i data-ir="13" data-t="02 · Com que time">Catorze pessoas e 12,6 FTE: seis dedicadas ao DTC e cinco ao B2B, sem fila compartilhada, mais direção de criação, arquitetura e fiscal com a dedicação declarada em cada canal. O tamanho saiu das horas reais do nosso sistema de gestão.</i>
-      <i data-ir="15" data-t="03 · Em quanto tempo">No DTC, o ciclo de 100 dias úteis do briefing, com marco de saída em cada etapa. No B2B, as 8 artes rápidas da semana entram por uma via própria, de 1 a 2 dias úteis.</i>
-      <i data-ir="20" data-t="04 · Com qual governança">Método 75 · da pauta à loja: cinco etapas, cada uma com critério objetivo de saída. Painel ao vivo 24/7, recebimento em D+2, execução em D+7, ciclo fechado em D+15.</i>
-      <i data-ir="14" data-t="05 · Com qual transparência">Open cost completo: custo salarial e encargos por hora, overhead e margem declarados, no formato da planilha de vocês. Os três modelos comparados e um recomendado. Os números vão no documento comercial, separado deste.</i>
-      <i data-ir="16" data-t="06 · Por que nós">As peças e as lojas modeladas em AR: vocês aprovam dentro da loja antes de produzir. E cada peça com número de série: quais receberam e quais instalaram, com foto.</i>
+      <i data-ir="metodo" data-t="01 · O que entregamos">Operação de trade ponta a ponta nos dois canais: criação, produção, logística e gestão de rede. Duas estruturas separadas: DTC e B2B não dividem fila.</i>
+      <i data-ir="time" data-t="02 · Com que time">Catorze pessoas e 12,6 FTE: seis dedicadas ao DTC e cinco ao B2B, sem fila compartilhada, mais direção de criação, arquitetura e fiscal com a dedicação declarada em cada canal. O tamanho saiu das horas reais do nosso sistema de gestão.</i>
+      <i data-ir="fluxo" data-t="03 · Em quanto tempo">No DTC, o ciclo de 100 dias úteis do briefing, com marco de saída em cada etapa. No B2B, as 8 artes rápidas da semana entram por uma via própria, de 1 a 2 dias úteis.</i>
+      <i data-ir="compromisso" data-t="04 · Com qual governança">Método 75 · da pauta à loja: cinco etapas, cada uma com critério objetivo de saída. Painel ao vivo 24/7, recebimento em D+2, execução em D+7, ciclo fechado em D+15.</i>
+      <i data-ir="dimensionamento" data-t="05 · Com qual transparência">Open cost completo: custo salarial e encargos por hora, overhead e margem declarados, no formato da planilha de vocês. Os três modelos comparados e um recomendado. Os números vão no documento comercial, separado deste.</i>
+      <i data-ir="bim" data-t="06 · Por que nós">As peças e as lojas modeladas em AR: vocês aprovam dentro da loja antes de produzir. E cada peça com número de série: quais receberam e quais instalaram, com foto.</i>
     </template>
     <p class="fecho anima d3">Se vocês pararem a leitura nesta página: a diferença da nossa proposta não está na criação. Está em conseguir dizer, no dia 30, quantas das 728 lojas instalaram.</p>
   </section>
@@ -156,7 +156,7 @@
     <div class="esq">
       <h2 class="anima">O dinheiro da produção <span class="onda t-teal">é do franqueado.</span></h2>
       <p class="lead anima d1">O briefing põe otimização do investimento do franqueado como objetivo, ao lado de unicidade de marca e excelência de execução. Isso muda o que significa errar: cada real mal gasto em produção não é desvio de orçamento, é desgaste com a rede.</p>
-      <button class="botao cheio seta anima d2" data-ir="17" data-cursor="Ir">Ver como medimos</button>
+      <button class="botao cheio seta anima d2" data-ir="serie" data-cursor="Ir">Ver como medimos</button>
     </div>
     <div class="cupom anima dir d2">
       <div class="cab"><b>Campanha · rede DTC</b>Cupom de perdas que ninguém mede<br>728 lojas · 23 campanhas</div>
@@ -236,7 +236,7 @@
   </section>
 
   <!-- ===================================================== 09 · cases -->
-  <section class="tela s-cases" data-tema="escuro" data-titulo="Cases" data-cap="(04) Cases">
+  <section id="cases" class="tela s-cases" data-tema="escuro" data-titulo="Cases" data-cap="(04) Cases">
     <h2 class="anima">Já entregamos as três etapas <span class="t-lime">que uma agência de criação não executa.</span></h2>
     <div class="grade">
       <article class="case anima d1"><div class="img amplia" data-amplia="assets/cases/panasonic.jpg" data-legenda="Panasonic · Carrefour Passeio" style="background-image:url(assets/cases/panasonic.jpg)" data-cursor="Ampliar"><span>Panasonic · Carrefour Passeio</span></div>
@@ -247,6 +247,25 @@
         <div class="corpo"><h3>Projeto especial é obra</h3><p>Stand de lançamento de marca. Projeto executivo completo (layout, cobertura, painéis de LED, rampa, expositores e comunicação) mais as artes aplicadas, do lambe-lambe de padrão ao neon flex.</p><div class="ficha">Ambientes separados para Decor e Signs, com parede de amostras e carros envelopados no piso do stand</div></div></article>
     </div>
     <p class="fecho anima d4">Os 2 a 3 projetos especiais por ano e as ~30 ambientações de GC do escopo de vocês são deste tipo de trabalho, e a parte cara deles é a engenharia, não a arte.</p>
+  </section>
+
+  <!-- ===================================================== depoimento Alltak -->
+  <section id="depoimento" class="tela s-dep" data-tema="lime" data-titulo="Depoimento · Alltak" data-cap="(04) Cases · depoimento">
+    <span class="eyebrow anima">Quem já viveu um cronograma com a gente · stand Alltak Decor</span>
+    <blockquote class="anima d1"><span class="aspas">“</span>Desde a primeira reunião, me surpreenderam com essa parte de planejamento.</blockquote>
+    <p class="segunda anima d2">“Um programa viável de execução. Datas de aprovações, datas de execução, finalização para a entrega do stand.”</p>
+    <div class="quem anima d2"><b>Marcelo Abreu</b><span>Alltak</span></div>
+    <div class="fatos anima d3">
+      <div><svg class="ic"><use href="#i-calendario"/></svg><b>Cronograma desde a 1ª reunião</b><span>data de aprovação e data de execução em cada etapa</span></div>
+      <div><svg class="ic"><use href="#i-cubo"/></svg><b>Modelado em 3D antes de construir</b><span>soluções testadas no digital, detalhe por detalhe</span></div>
+      <div><svg class="ic"><use href="#i-check"/></svg><b>Da ideia ao stand pronto</b><span>conceito, identidade, projeto, produção e montagem</span></div>
+    </div>
+    <div class="celular anima zoom d2">
+      <video id="vidDep" src="assets/video/alltak-marcelo.mp4" poster="assets/video/alltak-marcelo.webp" preload="none" playsinline></video>
+      <button class="play" id="playDep" data-cursor="Assistir" aria-label="Assistir ao depoimento"><i></i><span>Assistir · 1min19</span></button>
+      <div class="barrav"><i id="progDep"></i></div>
+    </div>
+    <p class="fecho anima d4">O ciclo de 100 dias úteis de vocês pede exatamente isso: cada etapa com data de aprovação e data de saída, combinadas antes de a campanha começar.</p>
   </section>
 
   <!-- ===================================================== 10 · números -->
@@ -296,7 +315,7 @@
   </section>
 
   <!-- ===================================================== 12 · método -->
-  <section class="tela s-met" data-tema="escuro" data-titulo="Método 75 · da pauta à loja" data-cap="(07) Método 75 · da pauta à loja">
+  <section id="metodo" class="tela s-met" data-tema="escuro" data-titulo="Método 75 · da pauta à loja" data-cap="(07) Método 75 · da pauta à loja">
     <h2 class="anima">Nenhuma etapa começa antes de a anterior <span class="t-lime">fechar o critério dela.</span></h2>
     <div class="passos anima d1" id="passos">
       <i class="progresso"></i>
@@ -315,7 +334,7 @@
   </section>
 
   <!-- ===================================================== 13 · time -->
-  <section class="tela s-time" data-tema="claro" data-titulo="O time dedicado à conta" data-cap="(08) O time dedicado à conta">
+  <section id="time" class="tela s-time" data-tema="claro" data-titulo="O time dedicado à conta" data-cap="(08) O time dedicado à conta">
     <h2 class="anima">Seis pessoas no DTC, cinco no B2B. <span class="t-teal">Nenhuma fila compartilhada.</span></h2>
     <p class="lead anima d1">O ciclo de 100 dias úteis e a arte rápida de 2 dias não cabem na mesma agenda. Os dois núcleos são estruturas separadas, com headcount próprio, e é assim que a planilha de open cost é entregue.</p>
     <div class="totais anima d1">
@@ -350,12 +369,12 @@
     </div>
     <div class="rodape-t anima d5">
       <div class="ritmo"><span>Pauta semanal</span><span>Status quinzenal</span><span>Ciclo mensal</span><span>Estratégia trimestral</span></div>
-      <button class="botao mini seta" data-ir="14" data-cursor="Ver">Como chegamos nesse número</button>
+      <button class="botao mini seta" data-ir="dimensionamento" data-cursor="Ver">Como chegamos nesse número</button>
     </div>
   </section>
 
   <!-- ===================================================== 14 · dimensionamento -->
-  <section class="tela s-dim" data-tema="escuro" data-titulo="Como dimensionamos o time" data-cap="(08) Como dimensionamos">
+  <section id="dimensionamento" class="tela s-dim" data-tema="escuro" data-titulo="Como dimensionamos o time" data-cap="(08) Como dimensionamos">
     <h2 class="anima">O tamanho do time <span class="t-lime">saiu do nosso sistema,</span> não de estimativa.</h2>
     <div class="mede anima d1">
       <div class="etapa-n"><i>1</i>Medimos: horas por entrega no Ariuno</div>
@@ -395,7 +414,7 @@
   </section>
 
   <!-- ===================================================== 15 · fluxo -->
-  <section class="tela s-flu" data-tema="claro" data-titulo="Fluxo de trabalho e sistemas de controle" data-cap="(09) Fluxo e sistemas de controle">
+  <section id="fluxo" class="tela s-flu" data-tema="claro" data-titulo="Fluxo de trabalho e sistemas de controle" data-cap="(09) Fluxo e sistemas de controle">
     <h2 class="anima">A arte rápida de 2 dias não entra <span class="onda t-teal">na mesma fila do ciclo de 100.</span></h2>
     <div class="raias anima d1">
       <div class="raia rapida"><div class="nome"><b>Via rápida</b><span>Arte rápida · 1 a 2 dias úteis</span></div>
@@ -423,8 +442,32 @@
     <p class="fecho anima d4">Com duas vias declaradas, a urgência de uma arte semanal não atrasa a campanha que está no dia 60 do ciclo, que é como campanha de trade costuma se perder.</p>
   </section>
 
+  <!-- ===================================================== Gestão Cliente Fee (Ariuno) -->
+  <section id="cliente-fee" class="tela s-fee" data-tema="claro2" data-titulo="O briefing vira peça por peça" data-cap="(09) Fluxo · feito para a Alpargatas">
+    <span class="eyebrow anima"><b>Novo no Ariuno</b> · criado para atender a Alpargatas</span>
+    <h2 class="anima d1">O briefing vira peça por peça, <span class="t-teal">e cada peça é aprovada na própria arte.</span></h2>
+    <div class="passos anima d2" id="feePassos">
+      <button class="passo on" data-p="0" data-cursor="Ver"><i>01</i><div><b>Briefing pelo link</b><span>O trade de vocês preenche um link sem login e marca as peças. As peças do escopo já vêm mapeadas por canal e tipo de campanha.</span></div></button>
+      <button class="passo" data-p="1" data-cursor="Ver"><i>02</i><div><b>Uma peça por formato de loja</b><span>A peça que vale para vários formatos vira uma por formato: Premium, Standard, Light, Compacta, Quiosque, flagship. Na demonstração, 10 pedidas viram 15.</span></div></button>
+      <button class="passo" data-p="2" data-cursor="Ver"><i>03</i><div><b>Ajuste marcado na arte</b><span>Vocês aprovam ou pedem ajuste na própria peça: ponto numerado, rabisco, seta, área destacada, anexo e print colado.</span></div></button>
+      <button class="passo" data-p="3" data-cursor="Ver"><i>04</i><div><b>Tudo à vista dos dois lados</b><span>Aprovadas, esperando vocês, em ajuste, em criação e sem arte. No quadro de jobs entra um card por campanha, com as peças aprovadas.</span></div></button>
+    </div>
+    <div class="janela anima dir d2">
+      <div class="barra-j"><i></i><i></i><i></i><span id="feeUrl">ariuno.com.br/?briefingFee=…</span></div>
+      <div class="vista" id="feeVista">
+        <img class="on amplia" src="assets/ariuno/fee-briefing.webp" alt="Briefing da campanha pelo link do cliente" data-amplia="assets/ariuno/fee-briefing.webp" data-legenda="Briefing pelo link, sem login · demonstração" data-cursor="Ampliar" data-url="ariuno.com.br/?briefingFee=…">
+        <img class="amplia" src="assets/ariuno/fee-aprovacao.webp" alt="Acompanhamento da campanha com as peças por formato" data-amplia="assets/ariuno/fee-aprovacao.webp" data-legenda="Acompanhamento do cliente: 15 peças por formato de loja · demonstração" data-cursor="Ampliar" data-url="ariuno.com.br/?aprovacaoFee=…" loading="lazy">
+        <img class="amplia" src="assets/ariuno/fee-ajuste.webp" alt="Pedido de ajuste marcado na arte" data-amplia="assets/ariuno/fee-ajuste.webp" data-legenda="Ajuste marcado na arte: ponto, seta e área · demonstração" data-cursor="Ampliar" data-url="ariuno.com.br/?aprovacaoFee=…" loading="lazy">
+        <img class="amplia" src="assets/ariuno/fee-aba.webp" alt="Aba Gestão Cliente Fee com a situação de cada peça" data-amplia="assets/ariuno/fee-aba.webp" data-legenda="Gestão Cliente Fee: a situação de cada peça · demonstração" data-cursor="Ampliar" data-url="ariuno.com.br · Gestão Cliente Fee" loading="lazy">
+      </div>
+      <div class="tempo"><i id="feeTempo"></i></div>
+    </div>
+    <p class="nota anima d3">Telas reais do Ariuno em modo demonstração, com a campanha de exemplo Dia das Mães + Aura. Clique para ampliar.</p>
+    <p class="fecho anima d4">Nenhuma peça se perde entre e-mail, WhatsApp e planilha: cada aprovação fica na própria peça, com nome, data e versão.</p>
+  </section>
+
   <!-- ===================================================== 16 · BIM e AR -->
-  <section class="tela s-bim" data-tema="escuro" data-titulo="BIM e AR antes de produzir" data-cap="(10) Tecnologia no PDV · antes de produzir">
+  <section id="bim" class="tela s-bim" data-tema="escuro" data-titulo="BIM e AR antes de produzir" data-cap="(10) Tecnologia no PDV · antes de produzir">
     <h2 class="anima">A peça é aprovada dentro da loja <span class="t-lime">antes de existir.</span></h2>
     <p class="lead anima d1">Já temos ambientes modelados, e podemos ter todos. A loja ou o franqueado manda fotos e planta, a gente modela aquela loja, e cada um vê, no próprio ambiente, como o enxoval da campanha vai ficar antes de a faca ser cortada.</p>
     <div class="casa3d anima d2"><b>3D e arquitetura já estão na casa</b><p>É o mesmo time que faz a engenharia das peças. Na conta de vocês entram um designer 3D dedicado ao DTC e um arquiteto compartilhado entre os canais. A parte que sustenta este capítulo não é terceirizada.</p></div>
@@ -446,8 +489,39 @@
     <p class="fecho anima d4">Não entra fornecedor a mais no orçamento para esta frente, e o modelo da loja fica com vocês, não com um estúdio de 3D que some quando a campanha acaba.</p>
   </section>
 
+  <!-- ===================================================== AR ao vivo -->
+  <section id="ar" class="tela s-ar" data-tema="claro2" data-titulo="Peças em AR, em tamanho real" data-cap="(10) Tecnologia no PDV · AR ao vivo">
+    <span class="eyebrow anima"><b>No ar</b> · gire com o mouse ou aponte a câmera do celular para o QR</span>
+    <h2 class="anima d1">Duas peças nossas em 3D. <span class="t-teal">No celular, em tamanho real.</span></h2>
+    <div class="cartao anima d2" data-ar="panasonic">
+      <div class="cab"><div><span class="eyebrow">Panasonic</span><b>Módulo de lavanderia</b></div><span class="med">1,78 × 0,99 × 1,45 m</span></div>
+      <model-viewer class="mv" data-src="https://projetos.75lab.com.br/ar/panasonic-modulo-lavanderia/display.glb?v=8" data-ios="https://projetos.75lab.com.br/ar/panasonic-modulo-lavanderia/display.usdz?v=8"
+        alt="Módulo de lavanderia Panasonic em 3D" camera-controls auto-rotate auto-rotate-delay="0" rotation-per-second="14deg" interaction-prompt="none"
+        camera-orbit="-28deg 76deg 88%" min-camera-orbit="auto 25deg auto" max-camera-orbit="auto 92deg auto" shadow-intensity="1.1" shadow-softness="0.9"
+        environment-image="neutral" exposure="1" tone-mapping="none" ar ar-modes="webxr scene-viewer quick-look" ar-scale="fixed" data-cursor="Girar"></model-viewer>
+      <div class="pe">
+        <div class="chips"><button class="on" data-src="https://projetos.75lab.com.br/ar/panasonic-modulo-lavanderia/display.glb?v=8" data-ios="https://projetos.75lab.com.br/ar/panasonic-modulo-lavanderia/display.usdz?v=8" data-cursor="Trocar">Com lavadoras</button><button data-src="https://projetos.75lab.com.br/ar/panasonic-modulo-lavanderia/prateleiras.glb?v=1" data-ios="https://projetos.75lab.com.br/ar/panasonic-modulo-lavanderia/prateleiras.usdz?v=1" data-cursor="Trocar">Com prateleiras</button></div>
+        <a class="qr" href="https://projetos.75lab.com.br/ar/panasonic-modulo-lavanderia/" target="_blank" rel="noopener" data-cursor="Abrir"><img src="assets/qr/ar-panasonic.svg" alt="QR do AR da Panasonic"><span>Abrir<br>em AR</span></a>
+      </div>
+    </div>
+    <div class="cartao anima d3" data-ar="semp">
+      <div class="cab"><div><span class="eyebrow">SEMP TCL</span><b>Enxoval Split HW</b></div><span class="med">15 peças em AR</span></div>
+      <model-viewer class="mv" data-src="https://projetos.75lab.com.br/ar/semp-split-hw/ilha.glb?v=1" data-ios="https://projetos.75lab.com.br/ar/semp-split-hw/ilha.usdz?v=1"
+        alt="Peça do enxoval SEMP TCL Split HW em 3D" camera-controls auto-rotate auto-rotate-delay="0" rotation-per-second="14deg" interaction-prompt="none"
+        camera-orbit="-28deg 76deg 88%" min-camera-orbit="auto 25deg auto" max-camera-orbit="auto 92deg auto" shadow-intensity="1.1" shadow-softness="0.9"
+        environment-image="neutral" exposure="1" tone-mapping="none" ar ar-modes="webxr scene-viewer quick-look" ar-scale="fixed" data-cursor="Girar"></model-viewer>
+      <div class="pe">
+        <div class="chips">
+          <button class="on" data-src="https://projetos.75lab.com.br/ar/semp-split-hw/ilha.glb?v=1" data-ios="https://projetos.75lab.com.br/ar/semp-split-hw/ilha.usdz?v=1" data-cursor="Trocar">Ilha Premium</button><button data-src="https://projetos.75lab.com.br/ar/semp-split-hw/portico.glb?v=1" data-ios="https://projetos.75lab.com.br/ar/semp-split-hw/portico.usdz?v=1" data-cursor="Trocar">Pórtico</button><button data-src="https://projetos.75lab.com.br/ar/semp-split-hw/backdrop.glb?v=1" data-ios="https://projetos.75lab.com.br/ar/semp-split-hw/backdrop.usdz?v=1" data-cursor="Trocar">Backdrop</button><button data-src="https://projetos.75lab.com.br/ar/semp-split-hw/berco.glb?v=1" data-ios="https://projetos.75lab.com.br/ar/semp-split-hw/berco.usdz?v=1" data-cursor="Trocar">Display berço</button>
+        </div>
+        <a class="qr" href="https://projetos.75lab.com.br/ar/semp-split-hw/" target="_blank" rel="noopener" data-cursor="Abrir"><img src="assets/qr/ar-semp.svg" alt="QR do AR da SEMP TCL"><span>Abrir<br>em AR</span></a>
+      </div>
+    </div>
+    <p class="fecho anima d4">É assim que o enxoval de cada campanha chega para aprovação: em 3D e em tamanho real, antes da faca. As lojas modeladas de vocês entram no mesmo visualizador.</p>
+  </section>
+
   <!-- ===================================================== 17 · número de série -->
-  <section class="tela s-ser" data-tema="claro" data-titulo="Cada peça tem número de série" data-cap="(10) Tecnologia no PDV · depois de enviar">
+  <section id="serie" class="tela s-ser" data-tema="claro" data-titulo="Cada peça tem número de série" data-cap="(10) Tecnologia no PDV · depois de enviar">
     <h2 class="anima">Cada peça tem <span class="onda t-teal">número de série.</span></h2>
     <p class="lead anima d1">A gente sabe se chegou, se foi instalada e se continua lá. Se o BIM resolve o intervalo antes da produção, o rastreio resolve o que vem depois do caminhão.</p>
     <button class="botao seta anima d2" id="virarTodos" data-cursor="Virar">Virar todas</button>
@@ -464,7 +538,7 @@
   </section>
 
   <!-- ===================================================== 18 · etiqueta x rastreador -->
-  <section class="tela s-etq" data-tema="escuro" data-titulo="Etiqueta ou rastreador" data-cap="(10) Tecnologia no PDV">
+  <section id="etiqueta" class="tela s-etq" data-tema="escuro" data-titulo="Etiqueta ou rastreador" data-cap="(10) Tecnologia no PDV">
     <h2 class="anima">Etiqueta onde a peça é barata. <span class="t-lime">Rastreador onde o ativo é caro e volta.</span></h2>
     <div class="tabela anima d1" id="tabEtq">
       <div class="r" style="border-bottom:3px solid var(--lime)"></div>
@@ -480,6 +554,7 @@
       <span class="selo pendente">Pendente · QR ao vivo</span>
       <b>Experimentem agora, nesta página</b>
       <p>Aponte a câmera para o código ao lado. É uma peça real do enxoval: o scan abre a página da peça e registra onde o escaneamento aconteceu, o mesmo dado que chega quando a loja escaneia no PDV. Já está no ar, não é protótipo de apresentação.</p>
+      <button class="botao mini seta" data-ir="painel-qr" data-cursor="Ver">Ver o painel que recebe o scan</button>
     </div>
     <div class="trilha anima d3">
       <span class="eyebrow">Código único por peça, não um QR de campanha</span>
@@ -489,6 +564,31 @@
       <div class="parada"><span class="bola"><svg class="ic"><use href="#i-lupa"/></svg></span><div><b>Auditoria</b><span>continua lá</span></div></div>
     </div>
     <p class="fecho anima d4" style="right:600px">Propor rastreador em tag de gancheira é o jeito mais rápido de perder credibilidade. GPS onde o ativo é caro e volta, QR onde a peça é barata e fica.</p>
+  </section>
+
+  <!-- ===================================================== painel do QR -->
+  <section id="painel-qr" class="tela s-qr" data-tema="claro2" data-titulo="O painel do QR" data-cap="(10) Tecnologia no PDV · painel do QR">
+    <span class="eyebrow anima"><b>Painel do QR</b> · demonstração com dados de exemplo</span>
+    <h2 class="anima d1">O scan da loja chega ao painel <span class="t-teal">na hora, com GPS e foto.</span></h2>
+    <div class="abas-q anima d2" id="qrAbas">
+      <button class="on" data-v="0" data-cursor="Ver">Números e ritmo</button><button data-v="1" data-cursor="Ver">Mapa das lojas</button><button data-v="2" data-cursor="Ver">Por estado</button>
+    </div>
+    <div class="janela anima d2">
+      <div class="barra-j"><i></i><i></i><i></i><span>projetos.75lab.com.br/produtos/painel</span></div>
+      <div class="vista" id="qrVista">
+        <div class="on pan amplia" data-amplia="assets/qr/painel-topo.webp" data-legenda="Painel do QR: números e ritmo · demonstração" data-cursor="Ampliar"><img src="assets/qr/painel-topo.webp" alt="Números e ritmo de execução do painel do QR"></div>
+        <div class="amplia" data-amplia="assets/qr/painel-mapa.webp" data-legenda="Painel do QR: mapa das lojas · demonstração" data-cursor="Ampliar"><img src="assets/qr/painel-mapa.webp" alt="Mapa das lojas positivadas" loading="lazy"></div>
+        <div class="amplia" data-amplia="assets/qr/painel-estados.webp" data-legenda="Painel do QR: positivação por estado · demonstração" data-cursor="Ampliar"><img src="assets/qr/painel-estados.webp" alt="Positivação por estado" loading="lazy"></div>
+      </div>
+      <div class="fachadas-q"><img src="assets/qr/painel-fachadas.webp" alt="Fachadas registradas"><img src="assets/qr/painel-fachadas.webp" alt=""></div>
+    </div>
+    <ul class="lista-q anima d3">
+      <li><svg class="ic"><use href="#i-qr"/></svg><div><b>Cada leitura grava</b><span>loja, rede, promotor próprio ou compartilhado, GPS com a precisão e a foto da fachada.</span></div></li>
+      <li><svg class="ic"><use href="#i-pin"/></svg><div><b>Loja pelo GPS</b><span>até 150 m é a mesma loja: o painel conta lojas, não leituras.</span></div></li>
+      <li><svg class="ic"><use href="#i-grafico"/></svg><div><b>Leitura pronta</b><span>lojas positivadas, ritmo do dia, tempo até a loja e ranking por rede, cidade e estado.</span></div></li>
+      <li><svg class="ic"><use href="#i-arquivo"/></svg><div><b>Excel e link ao vivo</b><span>tudo em Excel num clique, e o trade de vocês acompanha por um link sem login.</span></div></li>
+    </ul>
+    <p class="fecho anima d4">Os números desta tela são de demonstração. Na conta de vocês, o mesmo painel recebe cada peça do enxoval, loja a loja, e o link ao vivo vai para o trade da Alpargatas.</p>
   </section>
 
   <!-- ===================================================== 19 · dado auditável -->
@@ -508,7 +608,7 @@
   </section>
 
   <!-- ===================================================== 20 · compromisso -->
-  <section class="tela s-com" data-tema="escuro" data-titulo="O compromisso, conferível no dia 30" data-cap="(10) O compromisso">
+  <section id="compromisso" class="tela s-com" data-tema="escuro" data-titulo="O compromisso, conferível no dia 30" data-cap="(10) O compromisso">
     <h2 class="anima">O compromisso, <span class="t-lime">conferível no dia 30.</span></h2>
     <p class="lead anima d1">Já operamos rastreio em conta ativa, e os números daquele cliente não entram neste material: não abrimos dado de cliente nenhum, nem o de vocês. O que entra é a meta de leitura, assumida em contrato.</p>
     <div class="metas anima d2">
@@ -704,7 +804,7 @@
     </div>
     <div class="acoes anima d4">
       <a class="botao cheio seta" href="https://wa.me/5511986765634?text=Ol%C3%A1%2C%20vi%20a%20proposta%20da%2075%20LAB%20para%20o%20BID%20da%20Alpargatas" target="_blank" rel="noopener" data-cursor="Abrir">Fale conosco no WhatsApp</a>
-      <button class="botao seta" data-ir="1" data-cursor="Voltar">Voltar ao início</button>
+      <button class="botao seta" data-ir="capa" data-cursor="Voltar">Voltar ao início</button>
     </div>
     <div class="inst anima d5">
       <div><img src="assets/75lab-black.png" alt="75 LAB"><small>75 LAB Estratégia, Design e Produção Ltda · CNPJ 55.470.982/0001-77 · CENU, Torre Norte, Av. das Nações Unidas, 12.901, Brooklin, São Paulo, SP · contato@75lab.com.br · 75lab.com.br</small></div>
@@ -735,6 +835,6 @@
 <div id="cursor"></div><div id="anel"><span id="anelTxt"></span></div>
 <div id="gire"><img src="assets/75lab-lime.png" alt="75 LAB"><div class="tel"></div><h3>Gire o celular</h3><p>A apresentação foi desenhada na horizontal. Deitado, o celular mostra a tela inteira.</p><button class="botao mini" id="verAssim">Ver assim mesmo</button></div>
 
-<script src="assets/deck.js?v=20261027141216"></script>
+<script src="assets/deck.js?v=20261027172450"></script>
 </body>
 </html>

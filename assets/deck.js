@@ -25,6 +25,7 @@
   /* ---------------------------------------------------------- navegação */
   const aoEntrar={};
   function aplicar(n){
+    telas[atual].querySelectorAll('video').forEach(v=>v.pause());
     telas[atual].classList.remove('ativa');
     atual=n;const t=telas[n];
     t.classList.add('ativa');
@@ -57,7 +58,9 @@
   addEventListener('hashchange',()=>{const n=parseInt(location.hash.slice(1),10);if(!isNaN(n))ir(n-1);});
   $('#ant').addEventListener('click',e=>{e.stopPropagation();ir(atual-1);});
   $('#prox').addEventListener('click',e=>{e.stopPropagation();ir(atual+1);});
-  $$('[data-ir]').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();ir(+b.dataset.ir-1);}));
+  // data-ir aponta para o id da tela (ou o número dela, contado de 1)
+  const indice=v=>/^\d+$/.test(v)?+v-1:telas.findIndex(t=>t.id===v);
+  $$('[data-ir]').forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();ir(indice(b.dataset.ir));}));
 
   /* sumário */
   const sum=$('#sumario'), lista=$('#sumLista');
@@ -81,7 +84,7 @@
     else if(e.key==='Home')ir(0);else if(e.key==='End')ir(total-1);
     else if(e.key==='m'||e.key==='M')sum.classList.contains('aberto')?fecharSum():abrirSum();
   });
-  const INTERATIVO='a,button,input,.amplia,[data-cursor],#gantt,#compBim,#grade728,#tabEtq,.carta,#sumario,.ct';
+  const INTERATIVO='a,button,input,.amplia,[data-cursor],#gantt,#compBim,#grade728,#tabEtq,.carta,#sumario,.ct,model-viewer,.celular,.janela';
   $('#wrap').addEventListener('click',e=>{
     if(e.target.closest(INTERATIVO))return;
     if(sum.classList.contains('aberto'))return;
@@ -91,7 +94,7 @@
   addEventListener('touchstart',e=>{x0=e.touches[0].clientX;y0=e.touches[0].clientY;},{passive:true});
   addEventListener('touchend',e=>{
     if(x0===null)return;const dx=e.changedTouches[0].clientX-x0,dy=e.changedTouches[0].clientY-y0;
-    if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)&&!e.target.closest('#gantt,#compBim'))ir(dx<0?atual+1:atual-1);x0=null;
+    if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)&&!e.target.closest('#gantt,#compBim,model-viewer'))ir(dx<0?atual+1:atual-1);x0=null;
   });
 
   /* lightbox */
@@ -132,7 +135,7 @@
     }));
     // o botão do painel lê o destino na hora do clique
     const bt=$('#essIr');const novo=bt.cloneNode(true);bt.replaceWith(novo);
-    novo.addEventListener('click',e=>{e.stopPropagation();ir(+novo.dataset.ir-1);});
+    novo.addEventListener('click',e=>{e.stopPropagation();ir(indice(novo.dataset.ir));});
   })();
 
   /* ---------------------------------------------------------- 04 simultaneidade (Gantt) */
@@ -358,6 +361,56 @@
       const m=document.createElement('div');m.className='marco';m.style.left=pc(D(d));m.innerHTML='<i></i><b></b><span></span>';m.querySelector('b').textContent=b;m.querySelector('span').textContent=t;mc.appendChild(m);
     });
     mapa.appendChild(mc);
+  })();
+
+  /* ---------------------------------------------------------- depoimento Alltak */
+  (function(){
+    const v=$('#vidDep'),cel=v.closest('.celular'),pr=$('#progDep');
+    const alterna=e=>{e.stopPropagation();if(v.paused){v.play();}else{v.pause();}};
+    $('#playDep').addEventListener('click',alterna);
+    v.addEventListener('click',alterna);
+    v.addEventListener('play',()=>cel.classList.add('tocando'));
+    v.addEventListener('pause',()=>cel.classList.remove('tocando'));
+    v.addEventListener('ended',()=>{cel.classList.remove('tocando');v.load();});
+    v.addEventListener('timeupdate',()=>{pr.style.width=(v.duration?v.currentTime/v.duration*100:0)+'%';});
+  })();
+
+  /* ---------------------------------------------------------- Gestão Cliente Fee */
+  (function(){
+    const passos=$$('#feePassos .passo'),imgs=$$('#feeVista img'),url=$('#feeUrl'),barra=$('#feeTempo');
+    let i=0,timer=null;const PASSO=5200;
+    function mostra(k){
+      i=k;passos.forEach((p,j)=>p.classList.toggle('on',j===k));imgs.forEach((m,j)=>m.classList.toggle('on',j===k));
+      url.textContent=imgs[k].dataset.url;
+      barra.style.transition='none';barra.style.width='0';void barra.offsetWidth;
+      barra.style.transition='width '+PASSO+'ms linear';barra.style.width='100%';
+    }
+    function roda(){clearInterval(timer);timer=setInterval(()=>{if(!telas[atual].classList.contains('s-fee')){clearInterval(timer);return;}mostra((i+1)%passos.length);},PASSO);}
+    passos.forEach((p,k)=>p.addEventListener('click',e=>{e.stopPropagation();mostra(k);roda();}));
+    aoEntrar['s-fee']=()=>{mostra(0);roda();};
+  })();
+
+  /* ---------------------------------------------------------- AR ao vivo */
+  (function(){
+    let carregou=false;
+    function liga(mv,src,ios){mv.classList.add('carregando');mv.setAttribute('src',src);if(ios)mv.setAttribute('ios-src',ios);}
+    $$('.s-ar model-viewer').forEach(mv=>mv.addEventListener('load',()=>mv.classList.remove('carregando')));
+    aoEntrar['s-ar']=()=>{
+      if(!carregou){carregou=true;const sc=document.createElement('script');sc.type='module';sc.src='assets/vendor/model-viewer.min.js';document.head.appendChild(sc);}
+      $$('.s-ar model-viewer').forEach(mv=>{if(!mv.getAttribute('src'))liga(mv,mv.dataset.src,mv.dataset.ios);});
+    };
+    $$('.s-ar .cartao').forEach(c=>{
+      const mv=$('model-viewer',c),bts=$$('.chips button',c);
+      bts.forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();bts.forEach(x=>x.classList.toggle('on',x===b));liga(mv,b.dataset.src,b.dataset.ios);}));
+    });
+  })();
+
+  /* ---------------------------------------------------------- painel do QR */
+  (function(){
+    const abas=$$('#qrAbas button'),vistas=$$('#qrVista>div');
+    abas.forEach((b,k)=>b.addEventListener('click',e=>{e.stopPropagation();abas.forEach(x=>x.classList.toggle('on',x===b));vistas.forEach((v,j)=>v.classList.toggle('on',j===k));}));
+    // cada vista desce devagar pela tela do painel quando ela é mais alta que a janela
+    vistas.forEach(v=>v.classList.add('pan'));
   })();
 
   /* ---------------------------------------------------------- início */
