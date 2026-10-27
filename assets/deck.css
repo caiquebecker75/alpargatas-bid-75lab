@@ -7,6 +7,7 @@
   --titulo:'Big Shoulders Display',Impact,sans-serif;--corpo:'Space Grotesk',system-ui,sans-serif;--mono:'Space Mono',ui-monospace,monospace;
   --linha-c:rgba(5,5,5,.16);--linha-e:rgba(242,241,233,.16);
   --mx:50%;--my:50%;
+  --miolo:.88;--borda:calc(800px - 728px * var(--miolo));
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html,body{height:100%;background:var(--ink);overflow:hidden;color:var(--paper);font-family:var(--corpo);-webkit-font-smoothing:antialiased}
@@ -19,6 +20,8 @@ a{color:inherit}
 /* ---------- telas ---------- */
 .tela{position:absolute;inset:0;overflow:hidden;visibility:hidden;opacity:0}
 .tela.ativa{visibility:visible;opacity:1}
+/* miolo: o conteúdo encolhe por igual a partir do centro e sobra respiro nas bordas */
+.miolo{position:absolute;inset:0;transform:scale(var(--miolo));transform-origin:50% 50%}
 .tela[data-tema=claro]{background:var(--paper);color:var(--ink)}
 .tela[data-tema=claro2]{background:var(--paper-2);color:var(--ink)}
 .tela[data-tema=escuro]{background:var(--ink-2);color:var(--paper)}
@@ -93,7 +96,7 @@ h2{font-size:64px}
 @keyframes pulsa{50%{transform:scale(1.25);opacity:.4}}
 
 /* ---------- moldura global (topo, rodapé, transição) ---------- */
-#topo{position:absolute;top:30px;left:72px;right:72px;height:44px;display:flex;align-items:center;justify-content:space-between;z-index:40;pointer-events:none;transition:color .3s}
+#topo{position:absolute;top:30px;left:var(--borda);right:var(--borda);height:44px;display:flex;align-items:center;justify-content:space-between;z-index:40;pointer-events:none;transition:color .3s}
 #topo .marcas{display:flex;align-items:center;gap:16px;pointer-events:auto}
 #topo .marcas img{display:block}
 #topo .alp{height:34px}
@@ -112,7 +115,7 @@ h2{font-size:64px}
 #stage.t-claro #topo .marcas img.m-claro,#stage.t-lime #topo .marcas img.m-claro{display:block}
 #stage.capa #topo .cap{opacity:0}
 
-#rodape{position:absolute;left:72px;right:72px;bottom:22px;height:30px;display:flex;align-items:center;justify-content:space-between;z-index:40;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase}
+#rodape{position:absolute;left:var(--borda);right:var(--borda);bottom:22px;height:30px;display:flex;align-items:center;justify-content:space-between;z-index:40;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase}
 #rodape .assin{opacity:.55}
 #rodape .nav{display:flex;align-items:center;gap:12px}
 #rodape .nav button{width:34px;height:30px;border:2px solid currentColor;display:grid;place-items:center;font-family:var(--corpo);font-size:15px;transition:background .2s,color .2s}
@@ -128,12 +131,12 @@ h2{font-size:64px}
 #wipe.ink{background:var(--ink)}
 
 /* sumário */
-#sumario{position:absolute;inset:0;z-index:70;background:var(--ink);color:var(--paper);display:none;padding:110px 72px 70px}
+#sumario{position:absolute;inset:0;z-index:70;background:var(--ink);color:var(--paper);display:none;padding:110px var(--borda) 70px}
 #sumario.aberto{display:block;animation:entra .35s ease}
 @keyframes entra{from{opacity:0;transform:translateY(-14px)}}
 #sumario h2{font-size:56px;margin-bottom:26px}
 #sumario h2 span{color:var(--lime)}
-#sumario .fechar{position:absolute;top:34px;right:72px}
+#sumario .fechar{position:absolute;top:34px;right:var(--borda)}
 #sumario ol{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:0 30px;counter-reset:s}
 #sumario li{border-top:2px solid var(--linha-e)}
 #sumario li button{width:100%;display:flex;gap:14px;align-items:baseline;padding:11px 4px;text-align:left;font-family:var(--corpo);font-size:16px;line-height:1.25;transition:background .2s,color .2s,padding .2s}
@@ -556,9 +559,9 @@ body.tem-mouse.clicou #anel{transform:scale(.8)}
 .s-etq .tabela .r{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;opacity:.65}
 .s-etq .tabela.foco-qr .c-gps,.s-etq .tabela.foco-gps .c-qr{opacity:.28}
 .s-etq .tabela.foco-qr .c-qr,.s-etq .tabela.foco-gps .c-gps{background:rgba(192,238,78,.08)}
-.s-etq .qrvivo{position:absolute;left:1060px;top:116px;width:468px;border:2px dashed rgba(242,241,233,.45);padding:20px 22px}
+.s-etq .qrvivo{position:absolute;left:1060px;top:116px;width:468px;border:2px solid var(--linha-e);padding:20px 22px}
 .s-etq .qrvivo .quadro{width:150px;height:150px;float:left;margin:0 18px 8px 0;background:var(--paper);display:grid;place-items:center;color:var(--ink)}
-.s-etq .qrvivo .quadro .ic{width:96px;height:96px;stroke-width:2.5;opacity:.25}
+.s-etq .qrvivo .quadro .ic{width:96px;height:96px;stroke-width:2.5}
 .s-etq .qrvivo b{display:block;font-family:var(--titulo);font-size:26px;text-transform:uppercase;line-height:1;margin:10px 0 8px}
 .s-etq .qrvivo p{font-size:13.5px;line-height:1.45;opacity:.85}
 .s-etq .trilha{position:absolute;left:1060px;top:470px;width:468px}
@@ -659,16 +662,18 @@ body.tem-mouse.clicou #anel{transform:scale(.8)}
 .s-ris .fecho{bottom:86px}
 
 /* 23 KV São João */
-.s-kv h2{position:absolute;left:72px;top:112px;font-size:58px;width:860px}
-.s-kv .lead{position:absolute;left:72px;top:262px;width:600px;font-size:15.5px;opacity:.85}
+.s-kv h2{position:absolute;left:72px;top:112px;font-size:56px;width:630px}
+.s-kv .lead{position:absolute;left:72px;top:318px;width:600px;font-size:15.5px;opacity:.85}
 .s-kv .slots{position:absolute;left:740px;right:72px;top:118px;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:280px 200px;gap:12px}
-.s-kv .slot{border:2px dashed rgba(242,241,233,.45);position:relative;display:flex;flex-direction:column;justify-content:flex-end;padding:16px;overflow:hidden}
+.s-kv .slot{border:2px solid var(--linha-e);position:relative;display:flex;flex-direction:column;justify-content:flex-end;padding:16px;overflow:hidden}
 .s-kv .slot.grande{grid-column:1/-1}
 .s-kv .slot b{font-family:var(--titulo);font-size:26px;text-transform:uppercase;line-height:1;position:relative;z-index:1}
 .s-kv .slot span{font-size:12.5px;opacity:.75;position:relative;z-index:1;margin-top:4px}
 .s-kv .slot .selo{position:absolute;top:14px;left:14px;z-index:1}
-.s-kv .slot .fundo{position:absolute;inset:0;background-size:cover;background-position:center;opacity:.22;filter:grayscale(1)}
-.s-kv .pontos{position:absolute;left:72px;top:440px;width:600px}
+.s-kv .slot .fundo{position:absolute;inset:0;background-size:cover;background-position:center}
+.s-kv .slot::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(5,5,5,.88),rgba(5,5,5,.1) 60%)}
+.s-kv .slot b,.s-kv .slot span{z-index:2}
+.s-kv .pontos{position:absolute;left:72px;top:470px;width:600px}
 .s-kv .pontos .eyebrow{display:block;margin-bottom:10px;color:var(--lime)}
 .s-kv .pontos .fil{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
 .s-kv .pontos .fil div{position:relative;height:150px;background-size:cover;background-position:center;border:2px solid var(--linha-e);display:flex;align-items:flex-end;transition:transform .25s,border-color .25s}
@@ -865,8 +870,6 @@ body.tem-mouse.clicou #anel{transform:scale(.8)}
 .s-fee .passo.on span{opacity:.85}
 .s-fee .janela{left:724px;top:118px;width:804px}
 .s-fee .janela .vista{height:502px}
-.s-fee .janela .tempo{height:4px;background:var(--paper-2)}
-.s-fee .janela .tempo i{display:block;height:100%;width:0;background:var(--teal)}
 .s-fee .nota{position:absolute;left:724px;top:676px;width:804px;font-family:var(--mono);font-size:11px;letter-spacing:.04em;opacity:.6}
 .s-fee .fecho{bottom:86px}
 
@@ -915,3 +918,31 @@ body.tem-mouse.clicou #anel{transform:scale(.8)}
 .s-qr .lista-q span{font-size:14.5px;line-height:1.42}
 .s-qr .fecho{bottom:86px}
 .s-etq .qrvivo .botao{margin-top:12px}
+
+/* temporizador: barra que enche no botão aberto até o próximo abrir sozinho */
+.relogio-auto{position:absolute;left:0;bottom:0;height:4px;width:0;background:var(--teal);z-index:5;pointer-events:none;transition-property:width;transition-timing-function:linear}
+[data-tema=escuro] .relogio-auto{background:var(--lime)}
+[data-tema=lime] .relogio-auto{background:var(--ink)}
+.relogio-auto.corre{width:100%}
+
+/* modo PDF (?pdf=1): tudo no estado final, sem movimento nem controles de navegação */
+.pdf .anima{transition:none!important;opacity:1!important;transform:none!important}
+.pdf *,.pdf *::before,.pdf *::after{animation:none!important}
+.pdf .onda::after{transition:none!important}
+.pdf #cursor,.pdf #anel,.pdf #prog,.pdf #btnSumario,.pdf #btnPdf,.pdf #rodape .nav button,.pdf #gire{display:none!important}
+.pdf .so-tela{display:none!important}
+#btnPdf{pointer-events:auto;display:flex;align-items:center;gap:8px;font-family:var(--mono);font-weight:700;font-size:11px;letter-spacing:.14em;text-transform:uppercase;padding:9px 12px;border:2px solid currentColor;text-decoration:none;transition:background .2s,color .2s}
+#btnPdf svg{width:14px;height:14px;fill:none;stroke:currentColor;stroke-width:2.6;stroke-linecap:square}
+#btnPdf:hover{background:var(--lime);color:var(--ink);border-color:var(--ink)}
+#topo .dir{gap:12px}
+#topo .dir .cap{margin-right:10px}
+.pdf *,.pdf *::before,.pdf *::after{transition:none!important}
+/* no PDF o comparador mostra os dois lados empilhados, sem a alça */
+.pdf .s-bim .alca{display:none}
+.pdf .s-bim .lado{bottom:auto;height:50%;padding:8px 24px;grid-template-columns:200px 1fr 300px;gap:20px}
+.pdf .s-bim .lado.bim{top:50%;clip-path:none;border-top:2px solid var(--lime)}
+.pdf .s-bim .lado .tag{font-size:28px}
+.pdf .s-bim .cadeia span{padding:7px 4px}
+.pdf .s-bim .cadeia span.erro::after{top:-9px;width:18px;height:18px;line-height:18px;font-size:12px;margin-left:-9px}
+.pdf .s-bim .cadeia p{font-size:11px;margin-top:4px;line-height:1.3}
+.pdf .s-bim .custo b{font-size:26px}

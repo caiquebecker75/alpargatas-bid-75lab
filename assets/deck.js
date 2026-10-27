@@ -3,9 +3,21 @@
   const $=(s,r=document)=>r.querySelector(s), $$=(s,r=document)=>[...r.querySelectorAll(s)];
   const stage=$('#stage'), telas=$$('.tela'), wipe=$('#wipe'), prog=$('#prog i'), cont=$('#cont'), capTxt=$('#capTxt');
   const SVGNS='http://www.w3.org/2000/svg';
-  const reduz=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  // ?pdf=1: cada tela já no estado final, sem transição nem temporizador (usado para gerar o PDF)
+  const modoPdf=new URLSearchParams(location.search).has('pdf');
+  if(modoPdf)document.documentElement.classList.add('pdf');
+  const reduz=matchMedia('(prefers-reduced-motion: reduce)').matches||modoPdf;
   let atual=0, escalaAtual=1, emTransicao=false, pendente=null;
   const total=telas.length, dd=n=>String(n).padStart(2,'0');
+  const autos={};let autoAtivos=[]; // temporizador dos botões (ver mais abaixo)
+
+  /* ---------------------------------------------------------- miolo: o conteúdo de cada tela encolhe por igual, centralizado,
+     e o fundo continua ocupando a tela inteira (o que tem a classe sangra fica fora do miolo) */
+  telas.forEach(t=>{
+    const m=document.createElement('div');m.className='miolo';
+    [...t.childNodes].forEach(n=>{if(!(n.nodeType===1&&n.classList.contains('sangra')))m.appendChild(n);});
+    t.appendChild(m);
+  });
 
   /* ---------------------------------------------------------- palco */
   function escala(){
@@ -26,6 +38,7 @@
   const aoEntrar={};
   function aplicar(n){
     telas[atual].querySelectorAll('video').forEach(v=>v.pause());
+    pararAutos();
     telas[atual].classList.remove('ativa');
     atual=n;const t=telas[n];
     t.classList.add('ativa');
@@ -38,6 +51,7 @@
     $$('#sumLista button').forEach((b,i)=>b.classList.toggle('atual',i===n));
     history.replaceState(null,'','#'+(n+1));
     const fn=aoEntrar[t.classList[1]];if(fn)fn(t);
+    iniciarAutos(t);
   }
   function ir(n){
     n=Math.max(0,Math.min(total-1,n));
@@ -236,14 +250,15 @@
       ['KV aprovado','Arte-final e planta técnica','Checagem técnica e legal assinada'],
       ['Arte-final','Material produzido','3 orçamentos, protótipo testado e QA de lote'],
       ['Material produzido','Material posicionado','Comprovação de entrega e de execução']];
-    const passos=$$('.s-met .passo'),barra=$('.s-met .progresso');let timer=null;
+    const passos=$$('.s-met .passo'),barra=$('.s-met .progresso');
     function mostra(i){
       passos.forEach((p,j)=>{p.classList.toggle('on',j===i);p.classList.toggle('feito',j<i);});
       barra.style.width=(i*291.2)+'px';
       [['#metE',0],['#metS',1],['#metQ',2]].forEach(([s,k])=>{const p=$(s);p.textContent=M[i][k];p.classList.remove('troca');void p.offsetWidth;p.classList.add('troca');});
     }
-    passos.forEach(p=>p.addEventListener('click',e=>{e.stopPropagation();clearInterval(timer);mostra(+p.dataset.p);}));
-    aoEntrar['s-met']=()=>{clearInterval(timer);let i=0;mostra(0);timer=setInterval(()=>{i++;if(i>4||!telas[atual].classList.contains('s-met')){clearInterval(timer);return;}mostra(i);},2300);};
+    passos.forEach(p=>p.addEventListener('click',e=>{e.stopPropagation();mostra(+p.dataset.p);}));
+    aoEntrar['s-met']=()=>mostra(0);
+    roteiro('s-met',{itens:()=>passos,texto:k=>M[k].join(' ')});
   })();
 
   /* ---------------------------------------------------------- 15 fluxo */
@@ -281,7 +296,8 @@
       cartas.forEach((c,i)=>setTimeout(()=>c.classList.toggle('virada',!todas),i*110));
       e.currentTarget.firstChild.textContent=todas?'Virar todas':'Desvirar';
     });
-    aoEntrar['s-ser']=()=>{cartas.forEach(c=>c.classList.remove('virada'));setTimeout(()=>{if(telas[atual].classList.contains('s-ser'))cartas[0].classList.add('virada');},1600);};
+    aoEntrar['s-ser']=()=>{cartas.forEach(c=>c.classList.remove('virada'));$('#virarTodos').firstChild.textContent='Virar todas';if(modoPdf)cartas[0].classList.add('virada');};
+    roteiro('s-ser',{itens:()=>cartas,inicio:()=>-1,primeiro:1600,ms:()=>2800,laco:false});
   })();
 
   /* ---------------------------------------------------------- 18 etiqueta x rastreador */
@@ -377,17 +393,15 @@
 
   /* ---------------------------------------------------------- Gestão Cliente Fee */
   (function(){
-    const passos=$$('#feePassos .passo'),imgs=$$('#feeVista img'),url=$('#feeUrl'),barra=$('#feeTempo');
-    let i=0,timer=null;const PASSO=5200;
+    const passos=$$('#feePassos .passo'),imgs=$$('#feeVista img'),url=$('#feeUrl');
     function mostra(k){
-      i=k;passos.forEach((p,j)=>p.classList.toggle('on',j===k));imgs.forEach((m,j)=>m.classList.toggle('on',j===k));
+      passos.forEach((p,j)=>p.classList.toggle('on',j===k));imgs.forEach((m,j)=>m.classList.toggle('on',j===k));
       url.textContent=imgs[k].dataset.url;
-      barra.style.transition='none';barra.style.width='0';void barra.offsetWidth;
-      barra.style.transition='width '+PASSO+'ms linear';barra.style.width='100%';
     }
-    function roda(){clearInterval(timer);timer=setInterval(()=>{if(!telas[atual].classList.contains('s-fee')){clearInterval(timer);return;}mostra((i+1)%passos.length);},PASSO);}
-    passos.forEach((p,k)=>p.addEventListener('click',e=>{e.stopPropagation();mostra(k);roda();}));
-    aoEntrar['s-fee']=()=>{mostra(0);roda();};
+    passos.forEach((p,k)=>p.addEventListener('click',e=>{e.stopPropagation();mostra(k);}));
+    aoEntrar['s-fee']=()=>mostra(0);
+    // a tela do sistema também precisa de tempo de leitura: soma 1,5 s ao texto do passo
+    roteiro('s-fee',{itens:()=>passos,texto:k=>passos[k].textContent,extra:1500});
   })();
 
   /* ---------------------------------------------------------- AR ao vivo */
@@ -397,7 +411,7 @@
     $$('.s-ar model-viewer').forEach(mv=>mv.addEventListener('load',()=>mv.classList.remove('carregando')));
     aoEntrar['s-ar']=()=>{
       if(!carregou){carregou=true;const sc=document.createElement('script');sc.type='module';sc.src='assets/vendor/model-viewer.min.js';document.head.appendChild(sc);}
-      $$('.s-ar model-viewer').forEach(mv=>{if(!mv.getAttribute('src'))liga(mv,mv.dataset.src,mv.dataset.ios);});
+      $$('.s-ar model-viewer').forEach(mv=>{if(modoPdf)mv.removeAttribute('auto-rotate');if(!mv.getAttribute('src'))liga(mv,mv.dataset.src,mv.dataset.ios);});
     };
     $$('.s-ar .cartao').forEach(c=>{
       const mv=$('model-viewer',c),bts=$$('.chips button',c);
@@ -412,6 +426,51 @@
     // cada vista desce devagar pela tela do painel quando ela é mais alta que a janela
     vistas.forEach(v=>v.classList.add('pan'));
   })();
+
+  /* ---------------------------------------------------------- temporizador
+     Os botões de cada tela abrem sozinhos, um de cada vez, com tempo para ler.
+     O primeiro clique da pessoa dentro da tela para o temporizador até ela sair e voltar. */
+  function roteiro(cls,cfg){(autos[cls]=autos[cls]||[]).push(cfg);}
+  // tempo de leitura: 3 s mais 45 ms por letra, entre 4,5 e 12 s
+  const leitura=txt=>Math.max(4500,Math.min(12000,3000+String(txt||'').replace(/\s+/g,' ').trim().length*45));
+  function pararAutos(){autoAtivos.forEach(clearTimeout);autoAtivos=[];$$('.relogio-auto').forEach(r=>r.remove());}
+  function iniciarAutos(t){
+    if(modoPdf)return;
+    (autos[t.classList[1]]||[]).forEach(cfg=>{
+      const itens=cfg.itens(),n=itens.length;if(!n)return;
+      const ms=k=>cfg.ms?cfg.ms(k):leitura(cfg.texto?cfg.texto(k):itens[k].textContent)+(cfg.extra||0);
+      let i=cfg.inicio?cfg.inicio():Math.max(0,itens.findIndex(x=>x.matches('.on,.aberto')||x.parentElement.classList.contains('aberto')));
+      function relogio(k,dur){
+        const alvo=itens[k];
+        $$('.relogio-auto',t).forEach(r=>{if(r.parentElement&&itens.includes(r.parentElement))r.remove();});
+        if(getComputedStyle(alvo).position==='static')alvo.style.position='relative';
+        const r=document.createElement('i');r.className='relogio-auto';alvo.appendChild(r);
+        r.style.transitionDuration=dur+'ms';void r.offsetWidth;r.classList.add('corre');
+      }
+      function passo(){
+        if(i+1>=n&&cfg.laco===false){$$('.relogio-auto',t).forEach(r=>r.remove());return;}
+        i=(i+1)%n;itens[i].click();
+        if(i+1>=n&&cfg.laco===false)return;
+        const d=ms(i);relogio(i,d);autoAtivos.push(setTimeout(passo,d));
+      }
+      if(i<0){autoAtivos.push(setTimeout(passo,cfg.primeiro||2500));return;}
+      const d=ms(i);relogio(i,d);autoAtivos.push(setTimeout(passo,d));
+    });
+  }
+  // clique de verdade da pessoa (não o do temporizador) dentro da tela para tudo
+  stage.addEventListener('pointerdown',e=>{if(e.isTrusted&&e.target.closest('.tela.ativa'))pararAutos();},true);
+
+  const textoDe=id=>k=>$(id).content.querySelectorAll('i')[k].textContent;
+  roteiro('s-ess',{itens:()=>$$('.s-ess .tile'),texto:textoDe('#essDados')});
+  roteiro('s-fre',{itens:()=>$$('.s-fre .frente'),texto:textoDe('#freDados')});
+  roteiro('s-flu',{itens:()=>$$('.s-flu .ctl'),texto:textoDe('#fluDados')});
+  roteiro('s-sim',{itens:()=>[$('#simPico'),$('#simSJ')],inicio:()=>-1,primeiro:6000,ms:()=>6500});
+  roteiro('s-ar',{itens:()=>$$('.s-ar [data-ar=semp] .chips button'),ms:()=>8000});
+  roteiro('s-ar',{itens:()=>$$('.s-ar [data-ar=panasonic] .chips button'),ms:()=>11000});
+  roteiro('s-etq',{itens:()=>$$('#tabEtq .h'),inicio:()=>-1,primeiro:3500,ms:()=>6500});
+  roteiro('s-qr',{itens:()=>$$('#qrAbas button'),ms:()=>8000});
+  roteiro('s-ris',{itens:()=>$$('.s-ris .risco button'),texto:k=>$$('.s-ris .risco')[k].textContent});
+  roteiro('s-pai',{itens:()=>$$('#filtros728 button'),ms:()=>5000});
 
   /* ---------------------------------------------------------- início */
   const h=parseInt(location.hash.slice(1),10);
