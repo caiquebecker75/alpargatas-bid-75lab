@@ -389,6 +389,13 @@
     v.addEventListener('pause',()=>cel.classList.remove('tocando'));
     v.addEventListener('ended',()=>{cel.classList.remove('tocando');v.load();});
     v.addEventListener('timeupdate',()=>{pr.style.width=(v.duration?v.currentTime/v.duration*100:0)+'%';});
+    // a fila de vídeos troca o que toca no celular
+    const vids=$$('#filaVid .vid');
+    vids.forEach(b=>b.addEventListener('click',e=>{
+      e.stopPropagation();vids.forEach(x=>x.classList.toggle('on',x===b));
+      v.pause();v.poster=b.dataset.poster;v.src=b.dataset.src;pr.style.width='0';
+      $('#durDep').textContent='Assistir · '+b.dataset.dur;v.play();
+    }));
   })();
 
   /* ---------------------------------------------------------- Gestão Cliente Fee */
@@ -408,11 +415,13 @@
   (function(){
     let carregou=false;
     function liga(mv,src,ios){mv.classList.add('carregando');mv.setAttribute('src',src);if(ios)mv.setAttribute('ios-src',ios);}
-    $$('.s-ar model-viewer').forEach(mv=>mv.addEventListener('load',()=>mv.classList.remove('carregando')));
-    aoEntrar['s-ar']=()=>{
+    $$('model-viewer').forEach(mv=>mv.addEventListener('load',()=>mv.classList.remove('carregando')));
+    // o visualizador 3D só é baixado quando uma tela com modelo aparece (cases e AR ao vivo)
+    function ligaModelos(t){
       if(!carregou){carregou=true;const sc=document.createElement('script');sc.type='module';sc.src='assets/vendor/model-viewer.min.js';document.head.appendChild(sc);}
-      $$('.s-ar model-viewer').forEach(mv=>{if(modoPdf)mv.removeAttribute('auto-rotate');if(!mv.getAttribute('src'))liga(mv,mv.dataset.src,mv.dataset.ios);});
-    };
+      t.querySelectorAll('model-viewer').forEach(mv=>{if(modoPdf)mv.removeAttribute('auto-rotate');if(!mv.getAttribute('src'))liga(mv,mv.dataset.src,mv.dataset.ios);});
+    }
+    aoEntrar['s-ar']=ligaModelos;aoEntrar['s-cases']=ligaModelos;
     $$('.s-ar .cartao').forEach(c=>{
       const mv=$('model-viewer',c),bts=$$('.chips button',c);
       bts.forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();bts.forEach(x=>x.classList.toggle('on',x===b));liga(mv,b.dataset.src,b.dataset.ios);}));
