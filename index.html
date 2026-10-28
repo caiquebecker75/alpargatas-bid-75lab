@@ -10,7 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/deck.css?v=20261028104814">
+<link rel="stylesheet" href="assets/deck.css?v=20261028111801">
 </head>
 <body>
 
@@ -220,11 +220,18 @@
         <div><svg class="ic"><use href="#i-check"/></svg>Alvará</div><div><svg class="ic"><use href="#i-check"/></svg>AVCB</div><div><svg class="ic"><use href="#i-check"/></svg>ABVTEX</div>
         <div><svg class="ic"><use href="#i-check"/></svg>Certidões</div><div><svg class="ic"><use href="#i-check"/></svg>DCTFWeb</div><div><svg class="ic"><use href="#i-check"/></svg>Termo de adesão</div>
       </div>
-      <div class="mapa anima d3">
-        <div class="av"></div>
-        <div class="ponte"><span>mesma avenida · Av. das Nações Unidas</span></div>
-        <div class="pino"><i></i><b>75 LAB</b><span>CENU · nº 12.901</span></div>
-        <div class="pino alp"><i></i><b>Alpargatas</b><span>sede · nº 14.261</span></div>
+      <div class="rota anima d3">
+        <a class="mapa-g" href="https://www.google.com/maps/dir/?api=1&origin=Av.+das+Na%C3%A7%C3%B5es+Unidas%2C+12901+-+Brooklin%2C+S%C3%A3o+Paulo+-+SP&destination=Av.+das+Na%C3%A7%C3%B5es+Unidas%2C+14261+-+Vila+Gertrudes%2C+S%C3%A3o+Paulo+-+SP&travelmode=driving" target="_blank" rel="noopener" data-cursor="Abrir"><img src="assets/img/rota-75lab-alpargatas.webp" alt="Trajeto no Google Maps entre a 75 LAB e a sede da Alpargatas"></a>
+        <div class="info">
+          <span class="eyebrow"><b>(→)</b> Na mesma avenida da sede de vocês</span>
+          <div class="dist"><b class="num">2,5</b><small>km</small><b class="num">11</b><small>min de carro</small></div>
+          <div class="pontos-r">
+            <div><i class="o"></i><b>75 LAB</b><span>CENU · Av. das Nações Unidas, 12.901</span></div>
+            <div><i class="d"></i><b>Alpargatas</b><span>sede · Av. das Nações Unidas, 14.261</span></div>
+          </div>
+          <a class="botao mini seta so-tela" href="https://www.google.com/maps/dir/?api=1&origin=Av.+das+Na%C3%A7%C3%B5es+Unidas%2C+12901+-+Brooklin%2C+S%C3%A3o+Paulo+-+SP&destination=Av.+das+Na%C3%A7%C3%B5es+Unidas%2C+14261+-+Vila+Gertrudes%2C+S%C3%A3o+Paulo+-+SP&travelmode=driving" target="_blank" rel="noopener" data-cursor="Abrir">Abrir no Google Maps</a>
+          <small class="cred">Rota e tempo: Google Maps, 28/10/2026, via Av. Dr. Chucri Zaidan.</small>
+        </div>
       </div>
     </div>
     <div class="palco-duo anima zoom d1">
@@ -795,6 +802,6 @@
 <div id="cursor"></div><div id="anel"><span id="anelTxt"></span></div>
 <div id="gire"><img src="assets/75lab-lime.png" alt="75 LAB"><div class="tel"></div><h3>Gire o celular</h3><p>A apresentação foi desenhada na horizontal. Deitado, o celular mostra a tela inteira.</p><button class="botao mini" id="verAssim">Ver assim mesmo</button></div>
 
-<script src="assets/deck.js?v=20261028104814"></script>
+<script src="assets/deck.js?v=20261028111801"></script>
 </body>
 </html>
