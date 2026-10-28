@@ -890,28 +890,6 @@ body.tem-mouse.clicou #anel{transform:scale(.8)}
 .s-fee .nota{position:absolute;left:724px;top:676px;width:804px;font-family:var(--mono);font-size:11px;letter-spacing:.04em;opacity:.6}
 .s-fee .fecho{bottom:86px}
 
-/* ===================================================== AR ao vivo */
-.s-ar .eyebrow{position:absolute;left:72px;top:112px}
-.s-ar h2{position:absolute;left:72px;top:138px;width:1456px;font-size:58px}
-.s-ar .cartao{position:absolute;top:226px;width:712px;height:532px;background:#fff;border:2px solid var(--ink);display:flex;flex-direction:column}
-.s-ar .cartao[data-ar=panasonic]{left:72px}
-.s-ar .cartao[data-ar=semp]{left:816px}
-.s-ar .cab{display:flex;justify-content:space-between;align-items:flex-end;padding:14px 18px 12px;border-bottom:2px solid var(--ink)}
-.s-ar .cab .eyebrow{position:static;display:block;color:var(--teal);margin-bottom:4px}
-.s-ar .cab b{font-family:var(--titulo);font-size:30px;text-transform:uppercase;line-height:1}
-.s-ar .cab .med{font-family:var(--mono);font-size:12px;letter-spacing:.06em;background:var(--lime);padding:6px 9px;font-weight:700}
-.s-ar .mv{flex:1;width:100%;min-height:0;background:radial-gradient(ellipse at 50% 75%,#fff 0,#eeede6 70%);--poster-color:transparent;--progress-bar-color:var(--teal)}
-.s-ar .pe{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:12px 14px 12px 18px;border-top:2px solid var(--ink)}
-.s-ar .chips{display:flex;flex-wrap:wrap;gap:6px}
-.s-ar .chips button{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:8px 10px;border:2px solid var(--ink);transition:background .2s,color .2s}
-.s-ar .chips button:hover{background:var(--lime)}
-.s-ar .chips button.on{background:var(--ink);color:var(--lime)}
-.s-ar .qr{display:flex;align-items:center;gap:10px;text-decoration:none;flex:none}
-.s-ar .qr img{width:78px;height:78px;display:block}
-.s-ar .qr span{font-family:var(--mono);font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;line-height:1.3}
-.s-ar .carregando::after{content:'Carregando o 3D…';position:absolute;inset:auto 0 50% 0;text-align:center;font-family:var(--mono);font-size:12px;opacity:.5}
-.s-ar .fecho{bottom:86px}
-
 /* ===================================================== painel do QR */
 .s-qr .eyebrow{position:absolute;left:72px;top:112px}
 .s-qr h2{position:absolute;left:72px;top:138px;width:1400px;font-size:58px}

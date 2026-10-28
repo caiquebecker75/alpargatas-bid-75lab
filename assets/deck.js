@@ -411,7 +411,7 @@
     roteiro('s-fee',{itens:()=>passos,texto:k=>passos[k].textContent,extra:1500});
   })();
 
-  /* ---------------------------------------------------------- AR ao vivo */
+  /* ---------------------------------------------------------- 3D e AR nos cases */
   (function(){
     let carregou=false;
     function liga(mv,src,ios){mv.classList.add('carregando');mv.setAttribute('src',src);if(ios)mv.setAttribute('ios-src',ios);}
@@ -421,11 +421,7 @@
       if(!carregou){carregou=true;const sc=document.createElement('script');sc.type='module';sc.src='assets/vendor/model-viewer.min.js';document.head.appendChild(sc);}
       t.querySelectorAll('model-viewer').forEach(mv=>{if(modoPdf)mv.removeAttribute('auto-rotate');if(!mv.getAttribute('src'))liga(mv,mv.dataset.src,mv.dataset.ios);});
     }
-    aoEntrar['s-ar']=ligaModelos;aoEntrar['s-cases']=ligaModelos;
-    $$('.s-ar .cartao').forEach(c=>{
-      const mv=$('model-viewer',c),bts=$$('.chips button',c);
-      bts.forEach(b=>b.addEventListener('click',e=>{e.stopPropagation();bts.forEach(x=>x.classList.toggle('on',x===b));liga(mv,b.dataset.src,b.dataset.ios);}));
-    });
+    aoEntrar['s-cases']=ligaModelos;
   })();
 
   /* ---------------------------------------------------------- painel do QR */
@@ -474,8 +470,6 @@
   roteiro('s-fre',{itens:()=>$$('.s-fre .frente'),texto:textoDe('#freDados')});
   roteiro('s-flu',{itens:()=>$$('.s-flu .ctl'),texto:textoDe('#fluDados')});
   roteiro('s-sim',{itens:()=>[$('#simPico'),$('#simSJ')],inicio:()=>-1,primeiro:6000,ms:()=>6500});
-  roteiro('s-ar',{itens:()=>$$('.s-ar [data-ar=semp] .chips button'),ms:()=>8000});
-  roteiro('s-ar',{itens:()=>$$('.s-ar [data-ar=panasonic] .chips button'),ms:()=>11000});
   roteiro('s-etq',{itens:()=>$$('#tabEtq .h'),inicio:()=>-1,primeiro:3500,ms:()=>6500});
   roteiro('s-qr',{itens:()=>$$('#qrAbas button'),ms:()=>8000});
   roteiro('s-ris',{itens:()=>$$('.s-ris .risco button'),texto:k=>$$('.s-ris .risco')[k].textContent});
