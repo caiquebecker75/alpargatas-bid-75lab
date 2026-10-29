@@ -1516,3 +1516,69 @@ body.tem-mouse.clicou #anel{transform:scale(.8)}
 .s-resp2 .palco-duo .frase-duo em{font-style:normal;color:var(--lime)}
 .s-resp2 .palco-duo .quem{z-index:1;bottom:26px}
 .s-resp2 .palco-duo .quem b{display:inline;font-size:20px;margin-right:12px}
+
+/* =====================================================================
+   CAPÍTULO 05 · REDE E GESTÃO
+   ===================================================================== */
+.s-cap .trilha-cap{grid-template-columns:repeat(9,1fr)}
+.s-cap .trilha-cap span b{font-size:11.5px}
+/* a central */
+.s-central>.miolo>.eyebrow{position:absolute;left:72px;top:104px}
+.s-central h2{position:absolute;left:72px;top:132px;width:560px;font-size:52px}
+.s-central .mods{position:absolute;left:72px;top:290px;width:540px;list-style:none;display:flex;flex-direction:column;gap:6px}
+.s-central .mods li{background:#fff;border:2px solid var(--linha-c);transition:border-color .2s}
+.s-central .mods li button{position:relative;overflow:hidden;width:100%;display:flex;gap:12px;align-items:center;padding:10px 14px;text-align:left}
+.s-central .mods li i{font-style:normal;font-family:var(--mono);font-size:11px;font-weight:700;width:28px;height:28px;display:grid;place-items:center;background:rgba(5,5,5,.08);flex:none}
+.s-central .mods li b{font-family:var(--titulo);font-weight:900;font-size:22px;text-transform:uppercase}
+.s-central .mods li p{display:none;font-size:14px;line-height:1.45;padding:0 14px 12px 54px}
+.s-central .mods li.on{border-color:var(--ink)}
+.s-central .mods li.on i{background:var(--teal);color:#fff}
+.s-central .mods li.on p{display:block}
+.s-central>.miolo>.cta{left:72px;top:250px}
+.s-central .janela-c{position:absolute;left:650px;top:104px;width:878px;height:590px;background:var(--ink);display:flex;flex-direction:column}
+.s-central .janela-c .vista{position:relative;flex:1;overflow:hidden;background:#fff}
+.s-central .janela-c .vista img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:top left;opacity:0;transition:opacity .45s}
+.s-central .janela-c .vista img.on{opacity:1}
+.s-central .abrir-c{position:absolute;left:650px;top:712px}
+.s-central .story-c{display:none}
+.pdf .s-central .mods li p{display:block}
+.pdf .s-central .mods li i{background:var(--teal);color:#fff}
+.pdf .s-central .mods li button{padding:6px 12px}
+.pdf .s-central .mods li p{font-size:13px;padding-bottom:7px}
+.pdf .s-central .janela-c{display:none}
+.pdf .s-central .story-c{display:grid;position:absolute;left:650px;right:72px;top:104px;grid-template-columns:1fr 1fr;gap:10px}
+.pdf .s-central .story-c figure{background:var(--ink);padding:5px}
+.pdf .s-central .story-c figure:first-child{grid-column:span 2}
+.pdf .s-central .story-c img{width:100%;height:150px;object-fit:cover;object-position:top left;display:block}
+.pdf .s-central .story-c figure:first-child img{height:250px}
+.pdf .s-central .story-c figcaption{color:var(--paper);font-family:var(--mono);font-size:10.5px;padding:6px 4px 2px;letter-spacing:.06em;text-transform:uppercase}
+.pdf .s-central .story-c figcaption i{font-style:normal;background:var(--lime);color:var(--ink);padding:1px 5px;margin-right:6px;font-weight:700}
+/* atendimento */
+.s-sac h2{position:absolute;left:72px;top:104px;width:1380px;font-size:50px}
+.s-sac .passos-sac{position:absolute;left:72px;right:72px;top:236px;display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.s-sac .passos-sac div{border-top:4px solid var(--lime);padding-top:10px;position:relative}
+.s-sac .passos-sac i{font-style:normal;font-family:var(--titulo);font-weight:900;font-size:34px;color:var(--lime);line-height:1}
+.s-sac .passos-sac b{display:block;font-family:var(--titulo);font-weight:900;font-size:22px;text-transform:uppercase;margin:4px 0 6px;line-height:1.05}
+.s-sac .passos-sac p{font-size:14px;line-height:1.4;opacity:.85}
+.s-sac .print-sac{position:absolute;left:72px;top:432px;width:800px;height:380px;object-fit:cover;object-position:top left;border:3px solid var(--paper)}
+.s-sac .base{position:absolute;left:910px;right:72px;top:432px;background:rgba(242,241,233,.06);padding:18px 20px}
+.s-sac .base .eyebrow{display:block;color:var(--lime);margin-bottom:12px}
+.s-sac .base ul{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:8px 14px}
+.s-sac .base li{font-size:15px;padding-left:18px;position:relative}
+.s-sac .base li::before{content:'';position:absolute;left:0;top:7px;width:9px;height:9px;background:var(--lime)}
+.s-sac .base p{font-size:14px;line-height:1.45;opacity:.8;margin-top:16px;border-top:2px solid var(--linha-e);padding-top:12px}
+/* gestão */
+.s-gest h2{position:absolute;left:72px;top:104px;width:1300px;font-size:54px}
+.s-gest .tres-g{position:absolute;left:72px;right:72px;top:198px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.s-gest .tres-g div{display:grid;grid-template-columns:36px 1fr;gap:4px 12px}
+.s-gest .tres-g .ic{width:32px;height:32px;color:var(--teal);grid-row:span 2}
+.s-gest .tres-g b{font-family:var(--titulo);font-weight:900;font-size:24px;text-transform:uppercase}
+.s-gest .tres-g p{font-size:14px;line-height:1.45}
+.s-gest .prints-g{position:absolute;left:72px;right:72px;top:330px;display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.s-gest .prints-g img{width:100%;height:290px;object-fit:cover;object-position:top left;border:2px solid var(--ink);display:block;transition:transform .2s,box-shadow .2s}
+.s-gest .prints-g img:hover{transform:translate(-2px,-2px);box-shadow:5px 5px 0 var(--ink)}
+.s-gest .cad-g{position:absolute;left:72px;right:72px;top:650px;display:grid;grid-template-columns:180px repeat(5,1fr);gap:10px;background:var(--ink);color:var(--paper);padding:14px 18px;align-items:start}
+.s-gest .cad-g .eyebrow{color:var(--lime);align-self:center}
+.s-gest .cad-g div{border-top:3px solid var(--lime);padding-top:6px}
+.s-gest .cad-g b{display:block;font-family:var(--titulo);font-weight:900;font-size:22px;text-transform:uppercase}
+.s-gest .cad-g span{font-size:12.5px;opacity:.8;line-height:1.35}

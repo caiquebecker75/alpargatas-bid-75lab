@@ -102,7 +102,7 @@
     else if(e.key==='Home')ir(0);else if(e.key==='End')ir(total-1);
     else if(e.key==='m'||e.key==='M')sum.classList.contains('aberto')?fecharSum():abrirSum();
   });
-  const INTERATIVO='a,button,input,.amplia,[data-cursor],#gantt,#sumario,.ct,model-viewer,.celular,.janela,.tela-s,.dentro li,.trilha-cap span';
+  const INTERATIVO='a,button,input,.amplia,[data-cursor],#gantt,#sumario,.ct,model-viewer,.celular,.janela,.tela-s,.janela-c,.dentro li,.trilha-cap span';
   $('#wrap').addEventListener('click',e=>{
     if(e.target.closest(INTERATIVO))return;
     if(sum.classList.contains('aberto'))return;
@@ -320,6 +320,16 @@
     $('#simProx').addEventListener('click',e=>{e.stopPropagation();mostra(k+1);});
     aoEntrar['s-simu']=()=>mostra(0);
     roteiro('s-simu',{itens:()=>lis.map(l=>l.querySelector('button')),texto:i=>lis[i].textContent,extra:1500});
+  })();
+
+  /* ---------------------------------------------------------- central da rede: módulos */
+  (function(){
+    const lis=$$('#modsCentral li'),imgs=$$('#vistaCentral img'),abrir=$('#abrirCentral');
+    if(!lis.length)return;
+    function mostra(i){lis.forEach((l,j)=>l.classList.toggle('on',j===i));imgs.forEach((m,j)=>m.classList.toggle('on',j===i));abrir.href='assets/rede/central.html?v='+lis[i].querySelector('button').dataset.v;}
+    lis.forEach((l,i)=>l.querySelector('button').addEventListener('click',e=>{e.stopPropagation();mostra(i);}));
+    aoEntrar['s-central']=()=>mostra(0);
+    roteiro('s-central',{itens:()=>lis.map(l=>l.querySelector('button')),texto:i=>lis[i].textContent,extra:2500});
   })();
 
   /* ---------------------------------------------------------- 3D e AR nos cases */
