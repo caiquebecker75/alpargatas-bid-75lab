@@ -422,6 +422,8 @@
       t.querySelectorAll('model-viewer').forEach(mv=>{if(modoPdf)mv.removeAttribute('auto-rotate');if(!mv.getAttribute('src'))liga(mv,mv.dataset.src,mv.dataset.ios);});
     }
     aoEntrar['s-cases']=ligaModelos;
+    // o KV animado da campanha demo só toca na própria tela
+    aoEntrar['s-sj']=t=>{const v=t.querySelector('video');if(!modoPdf){v.preload='auto';v.play().catch(()=>{});}};
   })();
 
   /* ---------------------------------------------------------- painel do QR */

@@ -923,6 +923,24 @@ body.tem-mouse.clicou #anel{transform:scale(.8)}
 .s-qr .fecho{bottom:86px}
 .s-etq .qrvivo .botao{margin-top:12px}
 
+/* demonstração: campanha demo São João 2027 */
+.s-sj .texto{position:absolute;left:72px;top:168px;width:620px}
+.s-sj .eyebrow{display:block;margin-bottom:18px}
+.s-sj h2{font-size:76px;margin-bottom:22px}
+.s-sj h2 span{display:block}
+.s-sj .lead{font-size:18px;opacity:.88;margin-bottom:28px}
+.s-sj .nums{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:32px;border-top:2px solid var(--linha-e);padding-top:16px}
+.s-sj .nums b{display:block;font-size:64px;color:var(--lime)}
+.s-sj .nums span{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;opacity:.75}
+.s-sj .acoes{display:flex;align-items:center;gap:22px}
+.s-sj .qr-sj{display:flex;align-items:center;gap:12px;font-family:var(--mono);font-size:10.5px;letter-spacing:.04em;opacity:.8;line-height:1.5}
+.s-sj .qr-sj img{width:76px;height:76px;background:#fff;padding:4px}
+.s-sj .kv-sj{position:absolute;left:740px;top:168px;width:788px;height:443px;display:block;background:url(img/kv-sj-1.webp) center/cover;border:3px solid var(--paper);transition:transform .25s,box-shadow .25s}
+.s-sj .kv-sj:hover{transform:translate(-3px,-3px);box-shadow:6px 6px 0 var(--lime)}
+.s-sj .kv-sj video{width:100%;height:100%;object-fit:cover;display:block}
+.s-sj .pecas-sj{position:absolute;left:740px;top:628px;width:788px;display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.s-sj .pecas-sj img{width:100%;aspect-ratio:16/9;object-fit:cover;display:block;border:2px solid var(--linha-e)}
+
 /* temporizador: barra que enche no botão aberto até o próximo abrir sozinho */
 .relogio-auto{position:absolute;left:0;bottom:0;height:4px;width:0;background:var(--teal);z-index:5;pointer-events:none;transition-property:width;transition-timing-function:linear}
 [data-tema=escuro] .relogio-auto{background:var(--lime)}
