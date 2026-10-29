@@ -48,7 +48,7 @@
     cont.textContent=dd(n+1)+' / '+dd(total);
     $('#ant').disabled=n===0;$('#prox').disabled=n===total-1;
     t.querySelectorAll('[data-conta]').forEach(contar);
-    $$('#sumLista button').forEach((b,i)=>b.classList.toggle('atual',i===n));
+    $$('#sumLista button').forEach(b=>b.classList.toggle('atual',+b.dataset.i===n));
     history.replaceState(null,'','#'+(n+1));
     const fn=aoEntrar[t.classList[1]];if(fn)fn(t);
     iniciarAutos(t);
@@ -78,9 +78,13 @@
 
   /* sumário */
   const sum=$('#sumario'), lista=$('#sumLista');
+  let capAnt='';
   telas.forEach((t,i)=>{
+    const c=(t.dataset.cap||'').match(/^\((\d+)\) (.*)$/);
+    if(c&&c[1]!==capAnt){capAnt=c[1];const h=document.createElement('li');h.className='cap-s';h.textContent=c[1]+' · '+c[2];lista.appendChild(h);}
+    if(t.classList.contains('s-cap'))return;
     const li=document.createElement('li'), b=document.createElement('button');
-    b.innerHTML='<b>'+dd(i+1)+'</b>'+t.dataset.titulo;b.dataset.cursor='Ir';
+    b.innerHTML='<b>'+dd(i+1)+'</b>'+t.dataset.titulo;b.dataset.cursor='Ir';b.dataset.i=i;
     b.addEventListener('click',e=>{e.stopPropagation();fecharSum();setTimeout(()=>ir(i),60);});
     li.appendChild(b);lista.appendChild(li);
   });
@@ -98,7 +102,7 @@
     else if(e.key==='Home')ir(0);else if(e.key==='End')ir(total-1);
     else if(e.key==='m'||e.key==='M')sum.classList.contains('aberto')?fecharSum():abrirSum();
   });
-  const INTERATIVO='a,button,input,.amplia,[data-cursor],#gantt,#compBim,#grade728,#tabEtq,.carta,#sumario,.ct,model-viewer,.celular,.janela';
+  const INTERATIVO='a,button,input,.amplia,[data-cursor],#gantt,#sumario,.ct,model-viewer,.celular,.janela,.tela-s,.dentro li,.trilha-cap span';
   $('#wrap').addEventListener('click',e=>{
     if(e.target.closest(INTERATIVO))return;
     if(sum.classList.contains('aberto'))return;
@@ -108,7 +112,7 @@
   addEventListener('touchstart',e=>{x0=e.touches[0].clientX;y0=e.touches[0].clientY;},{passive:true});
   addEventListener('touchend',e=>{
     if(x0===null)return;const dx=e.changedTouches[0].clientX-x0,dy=e.changedTouches[0].clientY-y0;
-    if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)&&!e.target.closest('#gantt,#compBim,model-viewer'))ir(dx<0?atual+1:atual-1);x0=null;
+    if(Math.abs(dx)>60&&Math.abs(dx)>Math.abs(dy)&&!e.target.closest('#gantt,model-viewer'))ir(dx<0?atual+1:atual-1);x0=null;
   });
 
   /* lightbox */
@@ -136,21 +140,6 @@
   addEventListener('mouseup',()=>document.body.classList.remove('clicou'));
   addEventListener('touchstart',()=>document.body.classList.remove('tem-mouse'),{passive:true});
   $('#verAssim').addEventListener('click',()=>document.body.classList.add('forcar'));
-
-  /* ---------------------------------------------------------- 02 essencial */
-  (function(){
-    const dados=$$('#essDados')[0].content.querySelectorAll('i');
-    $$('.s-ess .tile').forEach(b=>b.addEventListener('click',e=>{
-      e.stopPropagation();const d=dados[+b.dataset.alvo];
-      $$('.s-ess .tile').forEach(x=>x.classList.toggle('on',x===b));
-      $('#essTit').textContent=d.dataset.t;const p=$('#essTxt');p.textContent=d.textContent;
-      p.classList.remove('troca');void p.offsetWidth;p.classList.add('troca');
-      $('#essIr').dataset.ir=d.dataset.ir;
-    }));
-    // o botão do painel lê o destino na hora do clique
-    const bt=$('#essIr');const novo=bt.cloneNode(true);bt.replaceWith(novo);
-    novo.addEventListener('click',e=>{e.stopPropagation();ir(indice(novo.dataset.ir));});
-  })();
 
   /* ---------------------------------------------------------- 04 simultaneidade (Gantt) */
   (function(){
@@ -243,115 +232,12 @@
     }));
   })();
 
-  /* ---------------------------------------------------------- 12 método */
-  (function(){
-    const M=[['Briefing do cliente','Pauta validada','Escopo, prazo e formatos acordados por escrito'],
-      ['Pauta validada','KV ou rota criativa','Aprovação formalizada e registrada'],
-      ['KV aprovado','Arte-final e planta técnica','Checagem técnica e legal assinada'],
-      ['Arte-final','Material produzido','3 orçamentos, protótipo testado e QA de lote'],
-      ['Material produzido','Material posicionado','Comprovação de entrega e de execução']];
-    const passos=$$('.s-met .passo'),barra=$('.s-met .progresso');
-    function mostra(i){
-      passos.forEach((p,j)=>{p.classList.toggle('on',j===i);p.classList.toggle('feito',j<i);});
-      barra.style.width=(i*291.2)+'px';
-      [['#metE',0],['#metS',1],['#metQ',2]].forEach(([s,k])=>{const p=$(s);p.textContent=M[i][k];p.classList.remove('troca');void p.offsetWidth;p.classList.add('troca');});
-    }
-    passos.forEach(p=>p.addEventListener('click',e=>{e.stopPropagation();mostra(+p.dataset.p);}));
-    aoEntrar['s-met']=()=>mostra(0);
-    roteiro('s-met',{itens:()=>passos,texto:k=>M[k].join(' ')});
-  })();
-
-  /* ---------------------------------------------------------- 15 fluxo */
-  (function(){
-    const dados=$('#fluDados').content.querySelectorAll('i');
-    $$('.s-flu .ctl').forEach(b=>b.addEventListener('click',e=>{
-      e.stopPropagation();const d=dados[+b.dataset.c];
-      $$('.s-flu .ctl').forEach(x=>x.classList.toggle('on',x===b));
-      $('#fluT').textContent=d.dataset.t;const p=$('#fluP');p.textContent=d.textContent;p.classList.remove('troca');void p.offsetWidth;p.classList.add('troca');
-    }));
-  })();
-
-  /* ---------------------------------------------------------- 16 comparador BIM */
-  (function(){
-    const comp=$('#compBim');let arr=false;
-    const poe=v=>comp.style.setProperty('--corte',Math.max(4,Math.min(96,v))+'%');
-    const deX=cx=>{const r=comp.getBoundingClientRect();return (cx-r.left)/r.width*100;};
-    comp.addEventListener('pointerdown',e=>{arr=true;comp.setPointerCapture(e.pointerId);poe(deX(e.clientX));e.stopPropagation();});
-    comp.addEventListener('pointermove',e=>{if(arr)poe(deX(e.clientX));});
-    comp.addEventListener('pointerup',()=>{arr=false;});
-    comp.addEventListener('click',e=>e.stopPropagation());
-    aoEntrar['s-bim']=()=>{
-      if(reduz){poe(50);return;}
-      const t0=performance.now();
-      (function passo(t){const p=Math.min(1,Math.max(0,(t-t0-700)/1800));const v=96-Math.sin(p*Math.PI*.75)*72;poe(v);if(p<1)requestAnimationFrame(passo);})(t0);
-    };
-  })();
-
-  /* ---------------------------------------------------------- 17 cartas */
-  (function(){
-    const cartas=$$('.s-ser .carta');
-    cartas.forEach(c=>c.addEventListener('click',e=>{e.stopPropagation();c.classList.toggle('virada');}));
-    $('#virarTodos').addEventListener('click',e=>{
-      e.stopPropagation();const todas=cartas.every(c=>c.classList.contains('virada'));
-      cartas.forEach((c,i)=>setTimeout(()=>c.classList.toggle('virada',!todas),i*110));
-      e.currentTarget.firstChild.textContent=todas?'Virar todas':'Desvirar';
-    });
-    aoEntrar['s-ser']=()=>{cartas.forEach(c=>c.classList.remove('virada'));$('#virarTodos').firstChild.textContent='Virar todas';if(modoPdf)cartas[0].classList.add('virada');};
-    roteiro('s-ser',{itens:()=>cartas,inicio:()=>-1,primeiro:1600,ms:()=>2800,laco:false});
-  })();
-
-  /* ---------------------------------------------------------- 18 etiqueta x rastreador */
-  (function(){
-    const tab=$('#tabEtq');
-    $$('#tabEtq .h').forEach(h=>h.addEventListener('click',e=>{
-      e.stopPropagation();const f='foco-'+h.dataset.foco,ja=tab.classList.contains(f);
-      tab.classList.remove('foco-qr','foco-gps');if(!ja)tab.classList.add(f);
-    }));
-  })();
-
   /* ---------------------------------------------------------- 22 riscos */
   (function(){
     $$('.s-ris .risco button').forEach(b=>b.addEventListener('click',e=>{
       e.stopPropagation();const r=b.parentElement,ab=r.classList.contains('aberto');
       $$('.s-ris .risco').forEach(x=>x.classList.remove('aberto'));if(!ab)r.classList.add('aberto');
     }));
-  })();
-
-  /* ---------------------------------------------------------- 26 painel das 728 lojas */
-  (function(){
-    const grade=$('#grade728'),tip=$('#tip728'),lojas=$('.s-pai .lojas');
-    let s=75;const rnd=()=>(s=(s*16807)%2147483647)/2147483647;
-    const tipo=Array(728).fill(1);let n2=98,n3=41;
-    while(n2){const i=Math.floor(rnd()*728);if(tipo[i]===1){tipo[i]=2;n2--;}}
-    while(n3){const i=Math.floor(rnd()*728);if(tipo[i]===1){tipo[i]=3;n3--;}}
-    const FMT=[['Premium',.18],['Standard',.32],['Light',.16],['Compacta 3',.14],['Layout antigo',.12],['Quiosque',.08]];
-    const fmt=()=>{let r=rnd(),a=0;for(const [n,p] of FMT){a+=p;if(r<a)return n;}return 'Standard';};
-    const frag=document.createDocumentFragment();
-    tipo.forEach((k,i)=>{
-      const c=document.createElement('i');c.className='k'+k;
-      const dia=10+Math.floor(rnd()*7),f=fmt();
-      c.dataset.t='Loja '+String(i+1).padStart(4,'0')+' · '+f+'\n'+(k===1?'instalada em '+dd(dia+1)+'/05, com foto':k===2?'recebida em '+dd(dia)+'/05 · aguardando instalação':'sem leitura de recebimento · ocorrência aberta');
-      frag.appendChild(c);
-    });
-    grade.appendChild(frag);
-    const cel=[...grade.children];
-    grade.addEventListener('mouseover',e=>{
-      const c=e.target.closest('i');if(!c)return;
-      tip.textContent=c.dataset.t;tip.style.display='block';
-      tip.style.left=(lojas.offsetLeft+c.offsetLeft+18)+'px';tip.style.top=(lojas.offsetTop+c.offsetTop-46)+'px';
-    });
-    grade.addEventListener('mouseleave',()=>{tip.style.display='none';});
-    grade.addEventListener('click',e=>e.stopPropagation());
-    $$('#filtros728 button').forEach(b=>b.addEventListener('click',e=>{
-      e.stopPropagation();$$('#filtros728 button').forEach(x=>x.classList.toggle('on',x===b));
-      grade.classList.remove('f1','f2','f3');if(b.dataset.f)grade.classList.add(b.dataset.f);
-    }));
-    aoEntrar['s-pai']=()=>{
-      cel.forEach(c=>c.classList.remove('v'));
-      if(reduz){cel.forEach(c=>c.classList.add('v'));return;}
-      // varredura em diagonal, como leituras chegando
-      cel.forEach((c,i)=>{const col=i%52,lin=Math.floor(i/52);setTimeout(()=>c.classList.add('v'),400+(col+lin*2)*14);});
-    };
   })();
 
   /* ---------------------------------------------------------- 27 transição */
@@ -398,17 +284,42 @@
     }));
   })();
 
-  /* ---------------------------------------------------------- Gestão Cliente Fee */
+  /* ---------------------------------------------------------- capas de capítulo: trilha e itens levam à tela */
   (function(){
-    const passos=$$('#feePassos .passo'),imgs=$$('#feeVista img'),url=$('#feeUrl');
-    function mostra(k){
-      passos.forEach((p,j)=>p.classList.toggle('on',j===k));imgs.forEach((m,j)=>m.classList.toggle('on',j===k));
-      url.textContent=imgs[k].dataset.url;
+    const capas=telas.filter(t=>t.classList.contains('s-cap'));
+    capas.forEach(c=>{
+      const n=c.dataset.capitulo,i0=telas.indexOf(c);
+      c.querySelectorAll('.trilha-cap span').forEach(s=>{
+        s.classList.toggle('on',s.dataset.c===n);s.classList.toggle('feito',s.dataset.c<n);s.dataset.cursor='Ir';
+        s.addEventListener('click',e=>{e.stopPropagation();const alvo=telas.findIndex(t=>(t.dataset.cap||'').startsWith('('+s.dataset.c+')'));if(alvo>=0)ir(alvo);});
+      });
+      c.querySelectorAll('.dentro li').forEach((li,k)=>{li.dataset.cursor='Ir';li.addEventListener('click',e=>{e.stopPropagation();ir(i0+1+k);});});
+    });
+  })();
+
+  /* ---------------------------------------------------------- frentes: no PDF, as quatro de uma vez */
+  (function(){
+    const box=$('.s-fre .todas-f');if(!box)return;
+    $('#freDados').content.querySelectorAll('i').forEach((d,k)=>{const el=document.createElement('div');el.innerHTML='<span>0'+(k+1)+'</span><b></b><p></p>';el.querySelector('b').textContent=d.dataset.t;el.querySelector('p').textContent=d.textContent;box.appendChild(el);});
+  })();
+
+  /* ---------------------------------------------------------- simulador do Ariuno */
+  (function(){
+    const lis=$$('#simPassos li'),imgs=$$('#simVista img'),url=$('#simUrl'),n=$('#simuN');
+    if(!lis.length)return;
+    let k=0;
+    function mostra(i){
+      k=(i+lis.length)%lis.length;
+      lis.forEach((l,j)=>{l.classList.toggle('on',j===k);l.classList.toggle('feito',j<k);});
+      const im=+lis[k].dataset.img;imgs.forEach((m,j)=>m.classList.toggle('on',j===im));
+      url.textContent=imgs[im].dataset.url;n.textContent='Passo '+(k+1)+' de '+lis.length;
+      $$('.s-simu .fases span').forEach(f=>f.classList.toggle('on',f.className.indexOf('f-'+lis[k].dataset.fase)>=0));
     }
-    passos.forEach((p,k)=>p.addEventListener('click',e=>{e.stopPropagation();mostra(k);}));
-    aoEntrar['s-fee']=()=>mostra(0);
-    // a tela do sistema também precisa de tempo de leitura: soma 1,5 s ao texto do passo
-    roteiro('s-fee',{itens:()=>passos,texto:k=>passos[k].textContent,extra:1500});
+    lis.forEach((l,i)=>l.querySelector('button').addEventListener('click',e=>{e.stopPropagation();mostra(i);}));
+    $('#simAnt').addEventListener('click',e=>{e.stopPropagation();mostra(k-1);});
+    $('#simProx').addEventListener('click',e=>{e.stopPropagation();mostra(k+1);});
+    aoEntrar['s-simu']=()=>mostra(0);
+    roteiro('s-simu',{itens:()=>lis.map(l=>l.querySelector('button')),texto:i=>lis[i].textContent,extra:1500});
   })();
 
   /* ---------------------------------------------------------- 3D e AR nos cases */
@@ -423,7 +334,7 @@
     }
     aoEntrar['s-cases']=ligaModelos;
     // o KV animado da campanha demo só toca na própria tela
-    aoEntrar['s-sj']=t=>{const v=t.querySelector('video');if(!modoPdf){v.preload='auto';v.play().catch(()=>{});}};
+    aoEntrar['s-demo']=t=>{const v=t.querySelector('video');if(!modoPdf){v.preload='auto';v.play().catch(()=>{});}};
   })();
 
   /* ---------------------------------------------------------- painel do QR */
@@ -468,14 +379,10 @@
   stage.addEventListener('pointerdown',e=>{if(e.isTrusted&&e.target.closest('.tela.ativa'))pararAutos();},true);
 
   const textoDe=id=>k=>$(id).content.querySelectorAll('i')[k].textContent;
-  roteiro('s-ess',{itens:()=>$$('.s-ess .tile'),texto:textoDe('#essDados')});
   roteiro('s-fre',{itens:()=>$$('.s-fre .frente'),texto:textoDe('#freDados')});
-  roteiro('s-flu',{itens:()=>$$('.s-flu .ctl'),texto:textoDe('#fluDados')});
   roteiro('s-sim',{itens:()=>[$('#simPico'),$('#simSJ')],inicio:()=>-1,primeiro:6000,ms:()=>6500});
-  roteiro('s-etq',{itens:()=>$$('#tabEtq .h'),inicio:()=>-1,primeiro:3500,ms:()=>6500});
   roteiro('s-qr',{itens:()=>$$('#qrAbas button'),ms:()=>8000});
   roteiro('s-ris',{itens:()=>$$('.s-ris .risco button'),texto:k=>$$('.s-ris .risco')[k].textContent});
-  roteiro('s-pai',{itens:()=>$$('#filtros728 button'),ms:()=>5000});
 
   /* ---------------------------------------------------------- início */
   const h=parseInt(location.hash.slice(1),10);
