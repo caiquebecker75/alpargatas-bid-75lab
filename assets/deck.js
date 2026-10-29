@@ -359,6 +359,11 @@
      Os botões de cada tela abrem sozinhos, um de cada vez, com tempo para ler.
      O primeiro clique da pessoa dentro da tela para o temporizador até ela sair e voltar. */
   function roteiro(cls,cfg){(autos[cls]=autos[cls]||[]).push(cfg);}
+  // PDF: tela com botões vira uma página por botão (fonte/gerar-pdf.mjs chama estas duas)
+  const SO_UMA_PAGINA=['s-ris'];
+  const cfgPdf=()=>{const t=$('.tela.ativa');return SO_UMA_PAGINA.includes(t.classList[1])?null:[t,(autos[t.classList[1]]||[])[0]];};
+  window.__pdfEstados=()=>{const r=cfgPdf();if(!r||!r[1])return 0;const n=r[1].itens(r[0]).length;return n>1?n:0;};
+  window.__pdfEstado=k=>{const [t,c]=cfgPdf();c.itens(t)[k].click();};
   // tempo de leitura: 3 s mais 45 ms por letra, entre 4,5 e 12 s
   const leitura=txt=>Math.max(4500,Math.min(12000,3000+String(txt||'').replace(/\s+/g,' ').trim().length*45));
   function pararAutos(){autoAtivos.forEach(clearTimeout);autoAtivos=[];$$('.relogio-auto').forEach(r=>r.remove());}

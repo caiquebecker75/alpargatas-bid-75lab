@@ -1001,7 +1001,7 @@ body.tem-mouse.clicou #anel{transform:scale(.8)}
 #sumario li button{padding:8px 4px;font-size:14.5px}
 
 /* capa de capítulo */
-.s-cap .num-cap{position:absolute;right:40px;bottom:-60px;font-family:var(--titulo);font-weight:900;font-size:640px;line-height:.8;color:var(--lime);opacity:.1;letter-spacing:-.04em}
+.s-cap .num-cap{position:absolute;right:160px;top:525px;font-family:var(--titulo);font-weight:900;font-size:200px;line-height:.8;color:var(--lime);opacity:.1;letter-spacing:-.04em}
 .s-cap .texto{position:absolute;left:72px;top:190px;width:900px}
 .s-cap .eyebrow{display:block;margin-bottom:22px}
 .s-cap h2{font-size:118px;line-height:.96;margin-bottom:24px}
@@ -1383,33 +1383,33 @@ body.tem-mouse.clicou #anel{transform:scale(.8)}
 
 /* ---------- PDF: tudo que depende de clique aparece de uma vez ---------- */
 .pdf .cta{display:none!important}
-.pdf .s-fre .detalhe,.pdf .s-fre .orbita .frente.on{display:none}
-.pdf .s-fre .todas-f{display:grid;position:absolute;left:760px;right:72px;top:250px;grid-template-columns:1fr 1fr;gap:12px}
-.pdf .s-fre .todas-f div{border-top:3px solid var(--lime);padding-top:8px}
-.pdf .s-fre .todas-f span{font-family:var(--mono);font-size:11px;color:var(--lime)}
-.pdf .s-fre .todas-f b{display:block;font-family:var(--titulo);font-weight:900;font-size:22px;text-transform:uppercase;margin:4px 0}
-.pdf .s-fre .todas-f p{font-size:13.5px;line-height:1.45;opacity:.85}
-.pdf .s-simu .tela-s,.pdf .s-simu .fases{display:none}
-.pdf .s-simu .passos-s li p{display:block}
-.pdf .s-simu .passos-s li{border-color:var(--linha-c)}
-.pdf .s-simu .passos-s li i{background:var(--teal);color:#fff}
-.pdf .s-simu .passos-s{top:250px;gap:5px}
-.pdf .s-simu .passos-s li button{padding:6px 12px}
-.pdf .s-simu .passos-s li p{padding-bottom:8px;font-size:13px}
-.pdf .s-simu .story{display:grid;position:absolute;left:712px;right:72px;top:108px;grid-template-columns:1fr 1fr;gap:12px}
-.pdf .s-simu .story figure{background:var(--ink);padding:6px}
-.pdf .s-simu .story img{width:100%;height:270px;object-fit:cover;object-position:top;display:block;background:#fff}
-.pdf .s-simu .story figcaption{color:var(--paper);font-family:var(--mono);font-size:11px;letter-spacing:.06em;padding:8px 4px 4px}
-.pdf .s-simu .story figcaption i{font-style:normal;background:var(--lime);color:var(--ink);padding:1px 6px;margin-right:6px;font-weight:700}
+.pdf:not(.estados) .s-fre .detalhe,.pdf:not(.estados) .s-fre .orbita .frente.on{display:none}
+.pdf:not(.estados) .s-fre .todas-f{display:grid;position:absolute;left:760px;right:72px;top:250px;grid-template-columns:1fr 1fr;gap:12px}
+.pdf:not(.estados) .s-fre .todas-f div{border-top:3px solid var(--lime);padding-top:8px}
+.pdf:not(.estados) .s-fre .todas-f span{font-family:var(--mono);font-size:11px;color:var(--lime)}
+.pdf:not(.estados) .s-fre .todas-f b{display:block;font-family:var(--titulo);font-weight:900;font-size:22px;text-transform:uppercase;margin:4px 0}
+.pdf:not(.estados) .s-fre .todas-f p{font-size:13.5px;line-height:1.45;opacity:.85}
+.pdf:not(.estados) .s-simu .tela-s,.pdf:not(.estados) .s-simu .fases{display:none}
+.pdf:not(.estados) .s-simu .passos-s li p{display:block}
+.pdf:not(.estados) .s-simu .passos-s li{border-color:var(--linha-c)}
+.pdf:not(.estados) .s-simu .passos-s li i{background:var(--teal);color:#fff}
+.pdf:not(.estados) .s-simu .passos-s{top:250px;gap:5px}
+.pdf:not(.estados) .s-simu .passos-s li button{padding:6px 12px}
+.pdf:not(.estados) .s-simu .passos-s li p{padding-bottom:8px;font-size:13px}
+.pdf:not(.estados) .s-simu .story{display:grid;position:absolute;left:712px;right:72px;top:108px;grid-template-columns:1fr 1fr;gap:12px}
+.pdf:not(.estados) .s-simu .story figure{background:var(--ink);padding:6px}
+.pdf:not(.estados) .s-simu .story img{width:100%;height:270px;object-fit:cover;object-position:top;display:block;background:#fff}
+.pdf:not(.estados) .s-simu .story figcaption{color:var(--paper);font-family:var(--mono);font-size:11px;letter-spacing:.06em;padding:8px 4px 4px}
+.pdf:not(.estados) .s-simu .story figcaption i{font-style:normal;background:var(--lime);color:var(--ink);padding:1px 6px;margin-right:6px;font-weight:700}
 .pdf .s-ris .risco .resp{display:block!important;max-height:none!important;opacity:1!important}
 .pdf .s-demo .qr-d{box-shadow:12px 12px 0 var(--lime)}
 .s-ris .cta{left:auto;right:72px;top:118px}
 .s-qr .cta{left:520px;top:226px}
 .s-dif .provas>div>span{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;opacity:.8}
 .s-dif .provas b span{font:inherit;opacity:1;letter-spacing:inherit;text-transform:none}
-.pdf .s-capa .acoes,.pdf .s-sim .placar .acoes{display:none}
-.pdf .s-fre .orbita{display:none}
-.pdf .s-fre .todas-f{left:640px;top:230px}
+.pdf .s-capa .acoes,.pdf:not(.estados) .s-sim .placar .acoes{display:none}
+.pdf:not(.estados) .s-fre .orbita{display:none}
+.pdf:not(.estados) .s-fre .todas-f{left:640px;top:230px}
 .s-eng .lead{width:1350px}
 .s-eng .estudo{top:250px;height:550px}
 .s-eng .folhas{top:250px}
@@ -1447,11 +1447,11 @@ body.tem-mouse.clicou #anel{transform:scale(.8)}
 .s-demo .pecas-d img{height:118px;aspect-ratio:auto}
 /* painel: no PDF, as três vistas lado a lado */
 .s-qr .trio-q{display:none}
-.pdf .s-qr .abas-q,.pdf .s-qr .janela{display:none}
-.pdf .s-qr .trio-q{display:grid;position:absolute;left:72px;top:232px;width:1000px;grid-template-columns:repeat(3,1fr);gap:10px}
-.pdf .s-qr .trio-q figure{background:var(--ink);padding:5px}
-.pdf .s-qr .trio-q img{width:100%;height:400px;object-fit:cover;object-position:top;display:block}
-.pdf .s-qr .trio-q figcaption{color:var(--paper);font-family:var(--mono);font-size:11px;padding:7px 4px 3px;letter-spacing:.06em;text-transform:uppercase}
+.pdf:not(.estados) .s-qr .abas-q,.pdf:not(.estados) .s-qr .janela{display:none}
+.pdf:not(.estados) .s-qr .trio-q{display:grid;position:absolute;left:72px;top:232px;width:1000px;grid-template-columns:repeat(3,1fr);gap:10px}
+.pdf:not(.estados) .s-qr .trio-q figure{background:var(--ink);padding:5px}
+.pdf:not(.estados) .s-qr .trio-q img{width:100%;height:400px;object-fit:cover;object-position:top;display:block}
+.pdf:not(.estados) .s-qr .trio-q figcaption{color:var(--paper);font-family:var(--mono);font-size:11px;padding:7px 4px 3px;letter-spacing:.06em;text-transform:uppercase}
 .s-eng .lead,.s-lojas .lead,.s-ini .lead,.s-proc .lead,.s-fra2 .lead,.s-cli2 .lead,.s-resp2 .lead{max-width:none}
 .pdf .s-demo .kv{display:none}
 .s-demo .veu{background:linear-gradient(90deg,rgba(5,5,5,.96) 0%,rgba(5,5,5,.93) 46%,rgba(5,5,5,.55) 62%,rgba(5,5,5,.1) 78%)}
@@ -1541,18 +1541,18 @@ body.tem-mouse.clicou #anel{transform:scale(.8)}
 .s-central .janela-c .vista img.on{opacity:1}
 .s-central .abrir-c{position:absolute;left:650px;top:712px}
 .s-central .story-c{display:none}
-.pdf .s-central .mods li p{display:block}
-.pdf .s-central .mods li i{background:var(--teal);color:#fff}
-.pdf .s-central .mods li button{padding:6px 12px}
-.pdf .s-central .mods li p{font-size:13px;padding-bottom:7px}
-.pdf .s-central .janela-c{display:none}
-.pdf .s-central .story-c{display:grid;position:absolute;left:650px;right:72px;top:104px;grid-template-columns:1fr 1fr;gap:10px}
-.pdf .s-central .story-c figure{background:var(--ink);padding:5px}
-.pdf .s-central .story-c figure:first-child{grid-column:span 2}
-.pdf .s-central .story-c img{width:100%;height:150px;object-fit:cover;object-position:top left;display:block}
-.pdf .s-central .story-c figure:first-child img{height:250px}
-.pdf .s-central .story-c figcaption{color:var(--paper);font-family:var(--mono);font-size:10.5px;padding:6px 4px 2px;letter-spacing:.06em;text-transform:uppercase}
-.pdf .s-central .story-c figcaption i{font-style:normal;background:var(--lime);color:var(--ink);padding:1px 5px;margin-right:6px;font-weight:700}
+.pdf:not(.estados) .s-central .mods li p{display:block}
+.pdf:not(.estados) .s-central .mods li i{background:var(--teal);color:#fff}
+.pdf:not(.estados) .s-central .mods li button{padding:6px 12px}
+.pdf:not(.estados) .s-central .mods li p{font-size:13px;padding-bottom:7px}
+.pdf:not(.estados) .s-central .janela-c{display:none}
+.pdf:not(.estados) .s-central .story-c{display:grid;position:absolute;left:650px;right:72px;top:104px;grid-template-columns:1fr 1fr;gap:10px}
+.pdf:not(.estados) .s-central .story-c figure{background:var(--ink);padding:5px}
+.pdf:not(.estados) .s-central .story-c figure:first-child{grid-column:span 2}
+.pdf:not(.estados) .s-central .story-c img{width:100%;height:150px;object-fit:cover;object-position:top left;display:block}
+.pdf:not(.estados) .s-central .story-c figure:first-child img{height:250px}
+.pdf:not(.estados) .s-central .story-c figcaption{color:var(--paper);font-family:var(--mono);font-size:10.5px;padding:6px 4px 2px;letter-spacing:.06em;text-transform:uppercase}
+.pdf:not(.estados) .s-central .story-c figcaption i{font-style:normal;background:var(--lime);color:var(--ink);padding:1px 5px;margin-right:6px;font-weight:700}
 /* atendimento */
 .s-sac h2{position:absolute;left:72px;top:104px;width:1380px;font-size:50px}
 .s-sac .passos-sac{position:absolute;left:72px;right:72px;top:236px;display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
@@ -1582,3 +1582,7 @@ body.tem-mouse.clicou #anel{transform:scale(.8)}
 .s-gest .cad-g div{border-top:3px solid var(--lime);padding-top:6px}
 .s-gest .cad-g b{display:block;font-family:var(--titulo);font-weight:900;font-size:22px;text-transform:uppercase}
 .s-gest .cad-g span{font-size:12.5px;opacity:.8;line-height:1.35}
+
+/* PDF com uma página por botão: o gerador põe .estados no html enquanto fotografa cada estado */
+.pdf.estados .tela.ativa .so-pdf{display:none!important}
+.pdf.estados .relogio-auto{display:none!important}
